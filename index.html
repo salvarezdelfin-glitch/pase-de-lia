@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pase de Lía</title>
+<meta name="description" content="Pase semanal de Lía — qué clases da, riders de UOO y cuánto le toca por quincena.">
+<meta name="theme-color" content="#8a3b56">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Pase de Lía">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,900;1,600&family=Karla:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light dark;
+    --paper:#f6efe6;
+    --paper-raised:#ffffff;
+    --ink:#2b231f;
+    --ink-soft:#78685f;
+    --ink-faint:#ab9c8f;
+    --line:#e6d9c8;
+    --line-strong:#d6c4ac;
+    --accent:#8a3b56;
+    --accent-ink:#fff5f7;
+    --accent-soft:#f3dee4;
+    --good:#3f7a55;
+    --good-soft:#dcebe0;
+    --pending:#b3782a;
+    --pending-soft:#f4e3c8;
+    --studio-milbarre:#b5502f;
+    --studio-milbarre-soft:#f6ddd0;
+    --studio-uoo:#2f5f6b;
+    --studio-uoo-soft:#dbe9ea;
+    --studio-other:#6b5f7a;
+    --studio-other-soft:#e6e0ee;
+    --shadow-sm:0 1px 2px rgba(43,35,31,.08);
+    --shadow-md:0 14px 34px -18px rgba(43,35,31,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#1c1712;
+      --paper-raised:#241d18;
+      --ink:#f2e9de;
+      --ink-soft:#bfad9f;
+      --ink-faint:#8a7a6c;
+      --line:#3a2f27;
+      --line-strong:#4d3f34;
+      --accent:#e08aa6;
+      --accent-ink:#2b0f18;
+      --accent-soft:#3a2029;
+      --good:#7fc79a;
+      --good-soft:#1c3226;
+      --pending:#e0ac5c;
+      --pending-soft:#3a2c14;
+      --studio-milbarre:#e8916b;
+      --studio-milbarre-soft:#3a2318;
+      --studio-uoo:#7fb8c2;
+      --studio-uoo-soft:#16292c;
+      --studio-other:#b7a8d1;
+      --studio-other-soft:#2b2436;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+      --shadow-md:0 14px 34px -18px rgba(0,0,0,.6);
+    }
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:'Karla',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  .num{font-family:'Space Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+  .wrap{max-width:600px;margin:0 auto;padding:30px 20px 64px}
+
+  header{display:flex;flex-direction:column;gap:5px;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:22px}
+  .eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  h1{font-family:'Fraunces',ui-serif,serif;font-weight:900;font-size:clamp(32px,9vw,44px);line-height:.98;margin:2px 0 4px;letter-spacing:-.01em;text-wrap:balance}
+  h1 em{font-style:italic;font-weight:600;color:var(--accent)}
+  .sub{color:var(--ink-soft);font-size:14px;margin:0}
+  #save-note{display:none;margin-top:12px;font-size:12.5px;color:var(--ink-soft);background:var(--paper-raised);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+  #save-note.show{display:block}
+  #save-note.bad{color:#a3311c;background:#fbe4de;border-color:#d98a72}
+  @media (prefers-color-scheme: dark){ #save-note.bad{color:#f0b6a6;background:#3a201a;border-color:#7a4436} }
+  #save-status{display:none;align-items:center;gap:6px;margin-top:10px;font-size:12.5px;font-weight:700}
+  #save-status.show{display:flex}
+  #save-status.saved{color:var(--good)}
+  #save-status .spin{width:8px;height:8px;border-radius:99px;background:currentColor}
+
+  .section{margin-bottom:28px}
+  h2{font-family:'Fraunces',ui-serif,serif;font-weight:700;font-size:21px;margin:0 0 12px;letter-spacing:-.005em}
+  .section-note{color:var(--ink-soft);font-size:13px;margin:-8px 0 14px}
+
+  /* hero */
+  .hero{background:var(--accent);color:var(--accent-ink);border-radius:20px;padding:22px 22px 20px;box-shadow:var(--shadow-md);display:flex;flex-direction:column;gap:14px}
+  .hero-top{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .hero-count{font-family:'Fraunces',ui-serif,serif;font-weight:900;font-size:52px;line-height:.85;letter-spacing:-.01em}
+  .hero-count small{font-family:'Karla',sans-serif;font-weight:700;font-size:16px;opacity:.8;margin-left:4px}
+  .hero-label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;opacity:.85;text-align:right}
+  .hero-week{font-size:13.5px;opacity:.9}
+  .hero-next{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border-radius:12px;padding:10px 12px;font-size:13.5px}
+  .hero-next .dot{width:7px;height:7px;border-radius:99px;background:currentColor;flex:0 0 auto}
+  .hero-next strong{font-weight:800}
+
+  .weeknav,.quincena-nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:6px}
+  .nav-btn{border:1px solid var(--line-strong);background:var(--paper-raised);color:var(--ink);width:32px;height:32px;flex:0 0 auto;border-radius:99px;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .nav-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .nav-btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .nav-btn:disabled{opacity:.35;cursor:default}
+  .nav-btn:disabled:hover{border-color:var(--line-strong);color:var(--ink)}
+  .weeknav-label{font-size:12.5px;font-weight:700;color:var(--ink-soft);min-width:150px;text-align:center;line-height:1.5}
+  .weeknav-label .q-range{display:block;font-weight:500;color:var(--ink-faint);font-size:11.5px}
+  .weeknav-today{background:none;border:none;color:var(--accent);font:inherit;font-size:12px;font-weight:700;text-decoration:underline;cursor:pointer;padding:2px}
+
+  /* day groups */
+  .day-group{margin-bottom:16px}
+  .day-heading{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .day-heading h3{font-family:'Fraunces',ui-serif,serif;font-weight:600;font-style:italic;font-size:17px;margin:0;color:var(--ink)}
+  .today-pill{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:99px}
+
+  .slot-row{display:flex;align-items:center;gap:12px;background:var(--paper-raised);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px;box-shadow:var(--shadow-sm);flex-wrap:wrap}
+  .slot-row.confirmed{border-color:var(--good);background:linear-gradient(0deg,var(--good-soft),var(--good-soft)),var(--paper-raised)}
+  .slot-time{font-family:'Space Mono',monospace;font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;width:64px;flex:0 0 auto}
+  .slot-meta{flex:1;min-width:120px;display:flex;flex-direction:column;gap:5px}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;width:fit-content}
+  .chip::before{content:"";width:6px;height:6px;border-radius:99px;background:currentColor;flex:0 0 auto}
+  .chip.milbarre{color:var(--studio-milbarre);background:var(--studio-milbarre-soft)}
+  .chip.uoo{color:var(--studio-uoo);background:var(--studio-uoo-soft)}
+  .chip.other{color:var(--studio-other);background:var(--studio-other-soft)}
+  .confirm-btn{flex:0 0 auto;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--ink-soft);font:inherit;font-weight:700;font-size:12.5px;padding:9px 14px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:40px;transition:background .15s,border-color .15s,color .15s}
+  .confirm-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .confirm-btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .confirm-btn.on{background:var(--paper-raised);border-color:var(--good);color:var(--good)}
+  .confirm-btn .mark{font-size:14px;line-height:1}
+  .riders-field{display:flex;align-items:center;gap:6px}
+  .riders-field label{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);font-weight:700}
+  .riders-field input{width:56px;font:inherit;font-family:'Space Mono',monospace;font-size:13.5px;padding:5px 7px;border-radius:7px;border:1px solid var(--line-strong);background:var(--paper-raised);color:var(--ink)}
+  .riders-field input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .pay-hint{font-size:12px;color:var(--good);font-weight:700}
+  .pay-hint.pending{color:var(--pending);font-weight:600}
+
+  /* quick extra */
+  .quick-extra{margin:2px 0 16px}
+  .quick-toggle{width:100%;border:1px dashed var(--line-strong);background:var(--paper-raised);color:var(--ink-soft);font:inherit;font-weight:700;font-size:13px;padding:11px 14px;border-radius:12px;cursor:pointer;display:flex;align-items:center;gap:8px;justify-content:center}
+  .quick-toggle:hover{border-color:var(--accent);color:var(--accent)}
+  .quick-form{margin-top:10px;background:var(--paper-raised);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow-sm)}
+
+  /* card / form */
+  .card{background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow-sm)}
+  .extra-form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;align-items:end}
+  .field{display:flex;flex-direction:column;gap:5px;min-width:0}
+  .field label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);font-weight:700}
+  .field input,.field select{font:inherit;font-size:14px;padding:8px 9px;border-radius:8px;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);width:100%}
+  .field input:focus-visible,.field select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .field.error input,.field.error select{border-color:#c0392b}
+  .btn{font:inherit;font-weight:700;font-size:13.5px;border:none;border-radius:10px;padding:10px 16px;cursor:pointer;background:var(--accent);color:var(--accent-ink);white-space:nowrap}
+  .btn:hover{filter:brightness(1.06)}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+
+  /* extra list */
+  .extra-row{display:flex;align-items:center;gap:10px;background:var(--paper-raised);border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin-top:8px;flex-wrap:wrap;box-shadow:var(--shadow-sm)}
+  .extra-date{font-size:12.5px;color:var(--ink-soft);width:52px;flex:0 0 auto}
+  .extra-riders{font-size:11.5px;color:var(--ink-faint)}
+  .extra-amount{margin-left:auto;font-weight:700;color:var(--accent)}
+  .del{border:none;background:none;color:var(--ink-faint);cursor:pointer;font-size:15px;line-height:1;padding:4px}
+  .del:hover{color:var(--accent)}
+  .empty-hint{font-size:12.5px;color:var(--ink-faint);padding:6px 2px}
+
+  /* payout / pagos */
+  .payout-card{background:var(--paper-raised);border:1px solid var(--accent);border-radius:16px;padding:18px 20px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:5px;margin-top:14px}
+  .payout-amount{font-family:'Fraunces',ui-serif,serif;font-weight:900;font-size:34px;color:var(--accent);letter-spacing:-.01em}
+  .payout-sub{font-size:13px;color:var(--ink-soft)}
+  .payout-pending{font-size:12px;color:var(--pending);margin-top:2px}
+
+  .payout-lines{margin-top:14px;display:flex;flex-direction:column;gap:16px}
+  .pl-studio h4{margin:0 0 7px}
+  .pl-item{display:flex;gap:10px;align-items:baseline;font-size:12.5px;padding:4px 0;border-bottom:1px dotted var(--line);color:var(--ink-soft)}
+  .pl-item .pl-when{width:104px;flex:0 0 auto;color:var(--ink)}
+  .pl-item .pl-mid{flex:1;color:var(--ink-faint)}
+  .pl-item .pl-amt{margin-left:auto;font-family:'Space Mono',monospace;font-weight:700;color:var(--ink);flex:0 0 auto}
+  .pl-item.pending .pl-amt{color:var(--pending)}
+  .pl-sub{font-size:12px;color:var(--ink-faint);margin-top:6px;font-weight:700}
+  .copy-row{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+  .copy-btn{border:1.5px solid var(--accent);background:var(--paper-raised);color:var(--accent);font:inherit;font-weight:700;font-size:12.5px;padding:9px 14px;border-radius:10px;cursor:pointer}
+  .copy-btn:hover{background:var(--accent-soft)}
+  .copy-status{font-size:12px;font-weight:700;color:var(--good)}
+
+  details.tabulador-ref,details.editor-panel{margin-top:14px;background:var(--paper-raised);border-radius:14px;padding:2px 16px}
+  details.tabulador-ref{border:1px solid var(--line)}
+  details.editor-panel{border:1px dashed var(--line-strong)}
+  details.tabulador-ref summary,details.editor-panel summary{cursor:pointer;padding:12px 0;font-weight:700;font-size:13px;color:var(--ink-soft);list-style:none}
+  details.tabulador-ref summary::-webkit-details-marker,details.editor-panel summary::-webkit-details-marker{display:none}
+  details.tabulador-ref summary::before{content:"📋 "}
+  details.editor-panel[open] summary{border-bottom:1px solid var(--line);margin-bottom:12px}
+  .tab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px;padding:2px 0 14px}
+  .tab-cell{display:flex;flex-direction:column;align-items:center;gap:1px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 4px}
+  .tab-cell .tab-n{font-size:10.5px;color:var(--ink-faint);font-weight:700}
+  .tab-cell .tab-v{font-size:12.5px;font-weight:700}
+  .tab-note{font-size:11.5px;color:var(--ink-faint);padding:0 0 12px}
+
+  /* editors */
+  .editor-body{padding:0 0 14px;display:flex;flex-direction:column;gap:10px}
+  .edit-slot,.mini-add{display:grid;grid-template-columns:1.1fr .85fr 1fr auto;gap:8px 10px;align-items:end}
+  .edit-slot{padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .mini-add{border-top:1px solid var(--line);padding-top:14px}
+  .edit-slot .field label,.mini-add .field label{font-size:10px}
+  .edit-slot .field input,.edit-slot .field select,.mini-add .field input,.mini-add .field select{padding:7px 8px;font-size:13px}
+  .icon-del{border:1px solid var(--line-strong);background:var(--paper);color:var(--ink-faint);border-radius:8px;height:34px;padding:0 11px;cursor:pointer;font-size:13px}
+  .icon-del:hover{border-color:var(--accent);color:var(--accent)}
+  .mini-add .btn{height:34px;padding:0 14px;font-size:12.5px}
+  .editor-hint{font-size:11.5px;color:var(--ink-faint);margin:2px 0 0}
+  .link-btn{background:none;border:none;color:var(--accent);font:inherit;font-weight:700;font-size:12.5px;text-decoration:underline;cursor:pointer;padding:2px;align-self:flex-start}
+  .rate-line{display:flex;align-items:end;gap:10px;flex-wrap:wrap}
+  .tab-edit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;padding:2px 0 4px}
+  .tab-edit-cell{display:flex;flex-direction:column;gap:3px}
+  .tab-edit-cell label{font-size:9.5px;color:var(--ink-faint);font-weight:700;text-align:center;text-transform:uppercase;letter-spacing:.03em}
+  .tab-edit-cell input{font:inherit;font-family:'Space Mono',monospace;font-size:12.5px;text-align:center;padding:5px 4px;border:1px solid var(--line-strong);border-radius:7px;background:var(--paper);color:var(--ink);width:100%}
+
+  /* history */
+  .history-row{display:flex;gap:8px;flex-wrap:wrap}
+  .history-chip{background:var(--paper-raised);border:1px solid var(--line);border-radius:12px;padding:9px 12px;display:flex;flex-direction:column;gap:3px;min-width:92px;box-shadow:var(--shadow-sm)}
+  .history-chip .hc-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);font-weight:700}
+  .history-chip .hc-value{font-family:'Space Mono',monospace;font-weight:700;font-size:15px}
+  .history-chip.full .hc-value{color:var(--good)}
+
+  footer{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:12px;text-align:center}
+
+  /* acceso privado */
+  .gate{position:fixed;inset:0;z-index:999;background:var(--paper);display:flex;align-items:center;justify-content:center;padding:24px}
+  .gate-card{max-width:320px;width:100%;background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:var(--shadow-md);display:flex;flex-direction:column;gap:10px}
+  .gate-card h2{font-family:'Fraunces',ui-serif,serif;font-weight:700;font-size:22px;margin:2px 0 0}
+  .gate-card .inp-gate{font:inherit;font-size:16px;padding:11px 12px;border-radius:9px;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);width:100%;margin-top:6px}
+  .gate-card .inp-gate:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .gate-card .btn{margin-top:4px}
+  .gate-error{color:#c0392b;font-size:12.5px;margin:0}
+
+  @media (max-width:520px){
+    .edit-slot{grid-template-columns:1fr 1fr auto;grid-template-areas:"day hora hora" "studio studio del"}
+    .edit-slot .field:nth-of-type(1){grid-area:day}
+    .edit-slot .field:nth-of-type(2){grid-area:hora}
+    .edit-slot .field:nth-of-type(3){grid-area:studio}
+    .edit-slot .icon-del{grid-area:del;height:34px}
+    .mini-add{grid-template-columns:1fr 1fr}
+    .mini-add .btn{grid-column:1/-1}
+  }
+  @media (max-width:420px){
+    .confirm-btn{width:100%;justify-content:center}
+    .extra-amount{margin-left:0;width:100%;order:5}
+    .pl-item{flex-wrap:wrap}
+    .pl-item .pl-amt{margin-left:0}
+  }
+</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <div class="gate-card">
+    <span class="eyebrow">Pase de Lía</span>
+    <h2>Acceso privado</h2>
+    <p class="section-note" style="margin:0">Escribe la contraseña que te compartió Sebas.</p>
+    <form id="gate-form">
+      <input type="password" id="gate-pass" class="inp-gate" placeholder="Contraseña" autocomplete="current-password" enterkeyhint="go">
+      <button type="submit" class="btn" id="gate-btn">Entrar</button>
+    </form>
+    <p class="gate-error" id="gate-error" hidden>Contraseña incorrecta, intenta de nuevo.</p>
+  </div>
+</div>
+
+<div class="wrap" id="app">
+  <header>
+    <span class="eyebrow">Pase semanal · Lía</span>
+    <h1>Pase de <em>Lía</em></h1>
+    <p class="sub" id="today-label"></p>
+    <p id="save-status"><span class="spin"></span><span id="save-status-text"></span></p>
+    <div id="save-note"></div>
+  </header>
+
+  <section class="section">
+    <div class="hero" id="hero"></div>
+    <div class="weeknav" id="weeknav"></div>
+  </section>
+
+  <section class="section">
+    <h2>Tu horario</h2>
+    <p class="section-note">Toca una clase cuando confirmes que vas. En UOO agrega cuántos riders hubo para calcular tu pago.</p>
+
+    <div class="quick-extra" id="quick-extra">
+      <button type="button" class="quick-toggle" id="quick-toggle">➕ Di una clase extra hoy</button>
+      <div class="quick-form" id="quick-form" hidden>
+        <div class="extra-form-grid">
+          <div class="field"><label for="q-studio">Estudio</label>
+            <select id="q-studio">
+              <option value="Mil Barre">Mil Barre</option>
+              <option value="UOO">UOO</option>
+              <option value="Otro">Otro estudio</option>
+            </select>
+          </div>
+          <div class="field" id="q-riders-field"><label for="q-riders">Riders</label><input type="number" min="1" max="30" inputmode="numeric" id="q-riders" placeholder="#"></div>
+          <div class="field" id="q-otro-name-field" hidden><label for="q-otro-name">Nombre del estudio</label><input type="text" id="q-otro-name" placeholder="ej. Sweat"></div>
+          <div class="field" id="q-otro-amount-field" hidden><label for="q-otro-amount">Monto</label><input type="number" min="0" inputmode="numeric" id="q-otro-amount" placeholder="$"></div>
+          <button class="btn" id="q-add-btn" type="button">Agregar</button>
+        </div>
+        <p class="editor-hint">Se registra con la fecha de hoy y se suma a tu quincena, igual que una suplencia.</p>
+      </div>
+    </div>
+
+    <div id="schedule-list"></div>
+
+    <details class="editor-panel" id="schedule-editor-panel">
+      <summary>✏️ Editar mi horario fijo</summary>
+      <div class="editor-body" id="schedule-editor"></div>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Clases extra / suplencias</h2>
+    <p class="section-note">Si diste una clase que no es de tu horario fijo, regístrala aquí — se suma a tu pago de la quincena.</p>
+    <div class="card">
+      <div class="extra-form-grid">
+        <div class="field"><label for="ex-date">Fecha</label><input type="date" id="ex-date"></div>
+        <div class="field"><label for="ex-studio">Estudio</label>
+          <select id="ex-studio">
+            <option value="Mil Barre">Mil Barre</option>
+            <option value="UOO">UOO</option>
+            <option value="Otro">Otro estudio</option>
+          </select>
+        </div>
+        <div class="field" id="ex-riders-field"><label for="ex-riders">Riders</label><input type="number" min="1" max="30" inputmode="numeric" id="ex-riders" placeholder="#"></div>
+        <div class="field" id="ex-otro-name-field" hidden><label for="ex-otro-name">Nombre del estudio</label><input type="text" id="ex-otro-name" placeholder="ej. Sweat"></div>
+        <div class="field" id="ex-otro-amount-field" hidden><label for="ex-otro-amount">Monto</label><input type="number" min="0" inputmode="numeric" id="ex-otro-amount" placeholder="$"></div>
+        <button class="btn" id="ex-add-btn" type="button">+ agregar suplencia</button>
+      </div>
+    </div>
+    <div id="extra-list"></div>
+  </section>
+
+  <section class="section">
+    <h2>Cuánto te toca</h2>
+    <p class="section-note">Mil Barre: tarifa fija por clase. UOO: según el tabulador de riders — incluye tu horario fijo y tus suplencias. Ambos pagan quincenal.</p>
+    <div class="quincena-nav" id="quincena-nav"></div>
+    <div class="payout-card" id="payout-card"></div>
+    <div class="payout-lines" id="payout-lines"></div>
+    <div class="copy-row">
+      <button type="button" class="copy-btn" id="copy-summary">📋 Copiar resumen para el estudio</button>
+      <span class="copy-status" id="copy-status" hidden></span>
+    </div>
+    <details class="tabulador-ref">
+      <summary>Ver tabulador de UOO (por número de riders)</summary>
+      <div class="tab-grid" id="tabulador-grid"></div>
+      <p class="tab-note">Definido hasta 16 riders — de ahí en adelante se calcula igual que 16.</p>
+    </details>
+    <details class="editor-panel" id="rates-editor-panel">
+      <summary>⚙️ Ajustar tarifas</summary>
+      <div class="editor-body" id="rates-editor"></div>
+    </details>
+  </section>
+
+  <section class="section">
+    <h2>Semanas anteriores</h2>
+    <div class="history-row" id="history-strip"></div>
+  </section>
+
+  <footer>Hecho por Sebas, para que no se te pase ninguna clase 🩰</footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------- acceso privado ----------
+  // Puerta simple: una contraseña compartida (no es seguridad real — solo evita
+  // que alguien que llega al link por accidente vea horario/pagos). Una vez
+  // desbloqueado, este dispositivo lo recuerda.
+  var GATE_KEY = "pase-de-lia-gate-v1";
+  var GATE_PASS = "PaseLia2026";
+  (function initGate(){
+    var gate = document.getElementById("gate");
+    if(!gate) return;
+    var unlocked = false;
+    try{ unlocked = localStorage.getItem(GATE_KEY) === "1"; }catch(e){}
+    if(unlocked){ gate.remove(); return; }
+    var input = document.getElementById("gate-pass");
+    var err = document.getElementById("gate-error");
+    function tryUnlock(){
+      if(input.value === GATE_PASS){
+        try{ localStorage.setItem(GATE_KEY, "1"); }catch(e){}
+        gate.remove();
+      } else {
+        err.hidden = false;
+        input.select();
+      }
+    }
+    document.getElementById("gate-form").addEventListener("submit", function(e){ e.preventDefault(); tryUnlock(); });
+    setTimeout(function(){ input.focus(); }, 50);
+  })();
+
+  var DIAS = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+  var DIAS_ORDEN = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
+  var MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+  var MESES_LARGO = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+
+  // Horario fijo por defecto — a partir de aquí Lía lo edita desde la página.
+  var DEFAULT_SCHEDULE = [
+    {id:"lb-mb-0700",  day:"Lunes",     time:"07:00", studio:"Mil Barre"},
+    {id:"lb-mb-0800",  day:"Lunes",     time:"08:00", studio:"Mil Barre"},
+    {id:"lb-uoo-0915", day:"Lunes",     time:"09:15", studio:"UOO"},
+    {id:"mi-uoo-0810", day:"Miércoles", time:"08:10", studio:"UOO"},
+    {id:"vi-uoo-0915", day:"Viernes",   time:"09:15", studio:"UOO"},
+    {id:"sa-uoo-1015", day:"Sábado",    time:"10:15", studio:"UOO"}
+  ];
+  var DEFAULT_MILBARRE_RATE = 250;
+  var DEFAULT_UOO_TABULADOR = {1:200,2:220,3:240,4:260,5:280,6:300,7:320,8:370,9:390,10:410,11:430,12:450,13:500,14:520,15:540,16:630};
+  var TAB_MAX = 16;
+
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  function studioClass(s){ return s === "Mil Barre" ? "milbarre" : (s === "UOO" ? "uoo" : "other"); }
+  function escapeHtml(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); }
+  function pad(n){ return String(n).padStart(2,"0"); }
+  function parseLocalDate(dateStr){ var p=dateStr.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function toDateStr(d){ return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+  function todayStr(){ return toDateStr(new Date()); }
+  function fmtHora12(t){
+    var parts = t.split(":"); var h = +parts[0]; var m = parts[1];
+    var ap = h < 12 ? "am" : "pm";
+    var h12 = h % 12; if(h12 === 0) h12 = 12;
+    return h12 + ":" + m + " " + ap;
+  }
+  function fmtCorto(d){ return d.getDate()+" "+MESES[d.getMonth()]; }
+  function fmtItemWhen(dateStr, time){
+    var d = parseLocalDate(dateStr);
+    var dia = DIAS[d.getDay()].slice(0,3).toLowerCase();
+    return dia + " " + d.getDate() + " " + MESES[d.getMonth()] + (time ? " · " + time : "");
+  }
+  var mxn = new Intl.NumberFormat("es-MX", {style:"currency", currency:"MXN", maximumFractionDigits:0});
+  function money(n){ return mxn.format(n||0); }
+
+  function mondayOf(dateStr){
+    var d = parseLocalDate(dateStr);
+    var dow = d.getDay();
+    var diff = (dow===0? -6 : 1-dow);
+    var mon = new Date(d); mon.setDate(d.getDate()+diff);
+    return mon;
+  }
+  function weekInfo(offset){
+    var mon = mondayOf(todayStr());
+    mon.setDate(mon.getDate() + 7*offset);
+    var sun = new Date(mon); sun.setDate(mon.getDate()+6);
+    return {
+      key: toDateStr(mon),
+      monday: mon,
+      sunday: sun,
+      label: "Semana del " + fmtCorto(mon) + " – " + fmtCorto(sun)
+    };
+  }
+  function dateForSlotInWeek(mondayDate, slotDay){
+    var offset = DIAS_ORDEN.indexOf(slotDay);
+    if(offset < 0) offset = 0;
+    var d = new Date(mondayDate); d.setDate(d.getDate()+offset);
+    return d;
+  }
+
+  // Mexican quincena convention: 1–15 y 16–fin de mes.
+  function shiftQuincena(dateStr, n){
+    var d = parseLocalDate(dateStr);
+    var y = d.getFullYear(), m = d.getMonth(), half = d.getDate()<=15 ? 0 : 1;
+    var totalHalves = (y*12+m)*2 + half - (n||0);
+    var newMonthIdx = Math.floor(totalHalves/2);
+    var newHalf = ((totalHalves%2)+2)%2;
+    var newY = Math.floor(newMonthIdx/12), newM = ((newMonthIdx%12)+12)%12;
+    return new Date(newY, newM, newHalf===0?1:16);
+  }
+  function quincenaFor(dateStr, back){
+    var ref = back ? shiftQuincena(dateStr, back) : parseLocalDate(dateStr);
+    var y = ref.getFullYear(), m = ref.getMonth(), day = ref.getDate();
+    var start, end;
+    if(day <= 15){ start = new Date(y,m,1); end = new Date(y,m,15); }
+    else { start = new Date(y,m,16); end = new Date(y,m+1,0); }
+    var label = fmtCorto(start)+" – "+fmtCorto(end)+" "+end.getFullYear();
+    return {startStr: toDateStr(start), endStr: toDateStr(end), label: label};
+  }
+
+  // ---------- state ----------
+  // STATE.schedule = [{id, day, time, studio}]           <- horario fijo, editable
+  // STATE.archived = { [slotId]: {day,time,studio} }      <- slots borrados, se guardan para no perder quincenas pasadas
+  // STATE.rates    = { milbarre:Number, uoo:{1..16:Number} }
+  // STATE.weeks[mondayKey] = { [slotId]: true (Mil Barre) | riderCount (UOO, 0 = pendiente) }
+  // STATE.extras   = [{id, date, studio, riders, amount}] <- suplencias / clases extra
+  //
+  // Persistencia: esta página es autónoma — vive en localStorage de ESTE navegador/
+  // teléfono. No depende de ninguna cuenta ni de conexión. Se guarda en cada cambio.
+  var LS_KEY = "pase-de-lia-state-v2";
+  function normalize(s){
+    s = (s && typeof s === "object") ? s : {};
+    if(!Array.isArray(s.schedule) || !s.schedule.length) s.schedule = clone(DEFAULT_SCHEDULE);
+    if(!s.archived || typeof s.archived !== "object") s.archived = {};
+    if(!s.rates || typeof s.rates !== "object") s.rates = {};
+    if(typeof s.rates.milbarre !== "number") s.rates.milbarre = DEFAULT_MILBARRE_RATE;
+    if(!s.rates.uoo || typeof s.rates.uoo !== "object") s.rates.uoo = clone(DEFAULT_UOO_TABULADOR);
+    if(!s.weeks || typeof s.weeks !== "object") s.weeks = {};
+    if(!Array.isArray(s.extras)) s.extras = [];
+    if(typeof s.updatedAt !== "number") s.updatedAt = 0;
+    return s;
+  }
+  function readLS(){
+    try{
+      var v = localStorage.getItem(LS_KEY);
+      var parsed = v ? JSON.parse(v) : null;
+      return (parsed && typeof parsed === "object") ? parsed : null;
+    }catch(e){ return null; }
+  }
+  function writeLS(s){
+    try{ localStorage.setItem(LS_KEY, JSON.stringify(s)); return true; }catch(e){ return false; }
+  }
+  var STATE = normalize(readLS());
+
+  function scheduleSorted(){
+    return STATE.schedule.slice().sort(function(a,b){
+      var d = DIAS_ORDEN.indexOf(a.day) - DIAS_ORDEN.indexOf(b.day);
+      return d || a.time.localeCompare(b.time);
+    });
+  }
+  function slotById(id){
+    var s = STATE.schedule.filter(function(x){ return x.id === id; })[0];
+    if(s) return s;
+    var a = STATE.archived[id];
+    if(a) return {id:id, day:a.day, time:a.time, studio:a.studio, archived:true};
+    return null;
+  }
+  function scheduleIdSet(){
+    var m = {}; STATE.schedule.forEach(function(s){ m[s.id] = true; }); return m;
+  }
+  function weekMapFor(weekKey){ return STATE.weeks[weekKey] || {}; }
+  function confirmedCount(weekKey){
+    var map = weekMapFor(weekKey), ids = scheduleIdSet();
+    return Object.keys(map).filter(function(k){ return ids[k]; }).length;
+  }
+  function payFor(slot, value){
+    if(slot.studio === "Mil Barre") return STATE.rates.milbarre;
+    if(slot.studio !== "UOO") return null;
+    var n = Math.round(value);
+    if(!n || n < 1) return null;
+    var capped = Math.min(n, TAB_MAX);
+    return STATE.rates.uoo[capped];
+  }
+  function studioOrder(keys){
+    var pri = {"Mil Barre":0, "UOO":1};
+    return keys.slice().sort(function(a,b){
+      var pa = pri.hasOwnProperty(a) ? pri[a] : 2, pb = pri.hasOwnProperty(b) ? pri[b] : 2;
+      return pa - pb || a.localeCompare(b);
+    });
+  }
+
+  var viewOffset = 0;
+  var payoutQuincenaBack = 0;
+  var saveStatusTimer = null;
+  var copyTimer = null;
+
+  // ---------- persistencia (localStorage, siempre) ----------
+  function showSaveNote(text, kind){
+    var el = document.getElementById("save-note");
+    el.textContent = text;
+    el.className = "show" + (kind ? " " + kind : "");
+    clearTimeout(saveStatusTimer);
+    document.getElementById("save-status").classList.remove("show");
+  }
+  function showSaved(){
+    document.getElementById("save-note").className = "";
+    clearTimeout(saveStatusTimer);
+    var el = document.getElementById("save-status");
+    document.getElementById("save-status-text").textContent = "Guardado ✓";
+    el.className = "saved show";
+    saveStatusTimer = setTimeout(function(){ el.classList.remove("show"); }, 1800);
+  }
+
+  function publishState(){
+    STATE.updatedAt = Date.now();
+    if(writeLS(STATE)){
+      showSaved();
+    } else {
+      showSaveNote("⚠️ No se pudo guardar en este teléfono. Si estás en una ventana privada o sin espacio de almacenamiento, tus cambios no se van a quedar guardados al salir.", "bad");
+    }
+  }
+
+  // ---------- mutations ----------
+  function toggleConfirm(weekKey, slot){
+    var newWeeks = Object.assign({}, STATE.weeks);
+    var map = Object.assign({}, newWeeks[weekKey] || {});
+    if(Object.prototype.hasOwnProperty.call(map, slot.id)){
+      delete map[slot.id];
+    } else {
+      map[slot.id] = slot.studio === "Mil Barre" ? true : 0;
+    }
+    if(Object.keys(map).length) newWeeks[weekKey] = map; else delete newWeeks[weekKey];
+    STATE = Object.assign({}, STATE, {weeks:newWeeks});
+    renderAll();
+    publishState();
+    if(slot.studio === "UOO" && Object.prototype.hasOwnProperty.call(map, slot.id)){
+      var el = document.getElementById("riders-" + slot.id);
+      if(el) el.focus();
+    }
+  }
+
+  function setRiders(weekKey, slotId, raw){
+    var n = parseInt(raw, 10);
+    if(isNaN(n) || n < 0) n = 0;
+    var newWeeks = Object.assign({}, STATE.weeks);
+    var map = Object.assign({}, newWeeks[weekKey] || {});
+    if(!Object.prototype.hasOwnProperty.call(map, slotId)) return;
+    map[slotId] = n;
+    newWeeks[weekKey] = map;
+    STATE = Object.assign({}, STATE, {weeks:newWeeks});
+    renderAll();
+    publishState();
+  }
+
+  function flashFieldError(id){
+    var el = document.getElementById(id);
+    var field = el && el.closest(".field");
+    if(!field) return;
+    field.classList.add("error");
+    setTimeout(function(){ field.classList.remove("error"); }, 1600);
+  }
+
+  // -- horario fijo --
+  function newSlotId(){ return "s-" + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+  function updateSlotField(id, f, val){
+    if(f === "time" && !/^\d\d:\d\d$/.test(val)) return;
+    STATE = Object.assign({}, STATE, {
+      schedule: STATE.schedule.map(function(s){
+        if(s.id !== id) return s;
+        var c = Object.assign({}, s); c[f] = val; return c;
+      })
+    });
+    renderAll();
+    publishState();
+  }
+  function addSlotFromForm(){
+    var day = document.getElementById("n-day").value;
+    var time = document.getElementById("n-time").value || "07:00";
+    var studio = document.getElementById("n-studio").value;
+    var entry = {id:newSlotId(), day:day, time:time, studio:studio};
+    STATE = Object.assign({}, STATE, {schedule: STATE.schedule.concat([entry])});
+    renderAll();
+    publishState();
+  }
+  function deleteSlot(id){
+    var s = STATE.schedule.filter(function(x){ return x.id === id; })[0];
+    if(!s) return;
+    var arch = Object.assign({}, STATE.archived);
+    arch[id] = {day:s.day, time:s.time, studio:s.studio};
+    STATE = Object.assign({}, STATE, {
+      schedule: STATE.schedule.filter(function(x){ return x.id !== id; }),
+      archived: arch
+    });
+    renderAll();
+    publishState();
+  }
+
+  // -- tarifas --
+  function setMilbarreRate(v){
+    var n = parseInt(v, 10); if(isNaN(n) || n < 0) n = 0;
+    var rates = Object.assign({}, STATE.rates, {milbarre:n});
+    STATE = Object.assign({}, STATE, {rates:rates});
+    renderSchedule(); renderPagos();
+    publishState();
+  }
+  function setTabRate(k, v){
+    var n = parseInt(v, 10); if(isNaN(n) || n < 0) n = 0;
+    var uoo = Object.assign({}, STATE.rates.uoo); uoo[k] = n;
+    STATE = Object.assign({}, STATE, {rates: Object.assign({}, STATE.rates, {uoo:uoo})});
+    renderSchedule(); renderPagos();
+    publishState();
+  }
+  function resetRates(){
+    STATE = Object.assign({}, STATE, {rates:{milbarre:DEFAULT_MILBARRE_RATE, uoo:clone(DEFAULT_UOO_TABULADOR)}});
+    renderAll();
+    publishState();
+  }
+
+  // -- extras / suplencias --
+  function addExtraEntry(o){
+    var entry = {
+      id: "ex-" + Date.now() + "-" + Math.random().toString(36).slice(2,7),
+      date: o.date, studio: o.studio, riders: (o.riders != null ? o.riders : null), amount: o.amount
+    };
+    STATE = Object.assign({}, STATE, {extras: STATE.extras.concat([entry])});
+    renderAll();
+    publishState();
+  }
+  function readExtraForm(prefix, dateFallback){
+    var g = function(suf){ return document.getElementById(prefix + suf); };
+    var studio = g("studio").value, finalStudio = studio, amount = 0, riders = null;
+    if(studio === "Mil Barre"){
+      amount = STATE.rates.milbarre;
+    } else if(studio === "UOO"){
+      var rv = parseInt(g("riders").value, 10);
+      if(!rv || rv < 1){ flashFieldError(prefix + "riders"); return null; }
+      riders = rv; amount = payFor({studio:"UOO"}, rv);
+    } else {
+      var name = g("otro-name").value.trim();
+      var amt = parseFloat(g("otro-amount").value);
+      if(!name){ flashFieldError(prefix + "otro-name"); return null; }
+      if(!amt || amt <= 0){ flashFieldError(prefix + "otro-amount"); return null; }
+      finalStudio = name; amount = amt;
+    }
+    var dateEl = g("date");
+    return {date: (dateEl && dateEl.value) || dateFallback || todayStr(), studio: finalStudio, riders: riders, amount: amount};
+  }
+  function clearExtraForm(prefix){
+    ["riders","otro-name","otro-amount"].forEach(function(suf){
+      var el = document.getElementById(prefix + suf); if(el) el.value = "";
+    });
+  }
+  function deleteExtra(id){
+    STATE = Object.assign({}, STATE, {extras: STATE.extras.filter(function(e){ return e.id !== id; })});
+    renderAll();
+    publishState();
+  }
+
+  // ---------- next class ----------
+  function nextClass(){
+    if(!STATE.schedule.length) return null;
+    var now = new Date();
+    var todayIdx = now.getDay();
+    var nowMin = now.getHours()*60 + now.getMinutes();
+    var order = STATE.schedule.map(function(s){
+      var di = DIAS_ORDEN.indexOf(s.day);
+      var dowOfSlot = ((di + 1) % 7);
+      var deltaDays = (dowOfSlot - todayIdx + 7) % 7;
+      var minutesFromNow = deltaDays*1440 + (s.time.split(":")[0]*60 + +s.time.split(":")[1]) - nowMin;
+      if(minutesFromNow < 0) minutesFromNow += 7*1440;
+      return {slot:s, rank:minutesFromNow};
+    });
+    order.sort(function(a,b){ return a.rank - b.rank; });
+    return order[0] ? order[0].slot : null;
+  }
+
+  // ---------- payout for a quincena ----------
+  function payoutForQuincena(back){
+    var today = todayStr();
+    var q = quincenaFor(today, back);
+    var qStart = parseLocalDate(q.startStr), qEnd = parseLocalDate(q.endStr);
+    var scanFrom = new Date(qStart); scanFrom.setDate(scanFrom.getDate() - 7);
+    var total = 0, count = 0, pending = 0;
+    var byStudio = {};
+    function bucket(s){
+      if(!byStudio[s]) byStudio[s] = {amount:0, count:0, items:[], pending:[]};
+      return byStudio[s];
+    }
+
+    Object.keys(STATE.weeks).forEach(function(weekKey){
+      var monday = parseLocalDate(weekKey);
+      if(monday < scanFrom || monday > qEnd) return;
+      var map = STATE.weeks[weekKey];
+      Object.keys(map).forEach(function(slotId){
+        var slot = slotById(slotId);
+        if(!slot) return;
+        var date = dateForSlotInWeek(monday, slot.day);
+        if(date < qStart || date > qEnd) return;
+        var b = bucket(slot.studio);
+        var val = map[slotId];
+        var pay = payFor(slot, val);
+        if(pay == null){
+          pending++;
+          b.pending.push({date:toDateStr(date), time:slot.time});
+          return;
+        }
+        total += pay; count++;
+        b.amount += pay; b.count++;
+        b.items.push({date:toDateStr(date), time:slot.time, riders:(slot.studio === "UOO" ? Math.round(val) : null), amount:pay});
+      });
+    });
+
+    STATE.extras.forEach(function(e){
+      var d = parseLocalDate(e.date);
+      if(d < qStart || d > qEnd) return;
+      var b = bucket(e.studio);
+      total += e.amount; count++;
+      b.amount += e.amount; b.count++;
+      b.items.push({date:e.date, time:null, riders:e.riders || null, amount:e.amount, extra:true});
+    });
+
+    Object.keys(byStudio).forEach(function(s){
+      byStudio[s].items.sort(function(a,b){ return a.date.localeCompare(b.date) || String(a.time||"").localeCompare(String(b.time||"")); });
+      byStudio[s].pending.sort(function(a,b){ return a.date.localeCompare(b.date); });
+    });
+
+    return {label:q.label, total:total, count:count, pending:pending, byStudio:byStudio};
+  }
+
+  function buildSummaryText(p){
+    var lines = [];
+    lines.push("Pase de Lía — " + p.label);
+    lines.push("");
+    studioOrder(Object.keys(p.byStudio)).forEach(function(s){
+      var b = p.byStudio[s];
+      lines.push(s.toUpperCase());
+      b.items.forEach(function(it){
+        var parts = ["· " + fmtItemWhen(it.date, it.time)];
+        if(it.riders) parts.push(it.riders + " riders");
+        if(it.extra) parts.push("extra");
+        parts.push(money(it.amount));
+        lines.push(parts.join(" · "));
+      });
+      b.pending.forEach(function(pd){
+        lines.push("· " + fmtItemWhen(pd.date, pd.time) + " · pendiente # de riders");
+      });
+      lines.push("Subtotal " + s + ": " + money(b.amount) + " (" + b.count + " clase" + (b.count===1?"":"s") + ")");
+      lines.push("");
+    });
+    lines.push("TOTAL: " + money(p.total) + " (" + p.count + " clase" + (p.count===1?"":"s") + ")");
+    if(p.pending) lines.push("Pendiente: " + p.pending + " clase(s) de UOO sin # de riders — aún no sumadas");
+    return lines.join("\n");
+  }
+
+  function copySummary(){
+    var text = buildSummaryText(payoutForQuincena(payoutQuincenaBack));
+    var el = document.getElementById("copy-status");
+    var done = function(){
+      el.textContent = "Copiado ✓"; el.style.color = "var(--good)"; el.hidden = false;
+      clearTimeout(copyTimer); copyTimer = setTimeout(function(){ el.hidden = true; }, 2400);
+    };
+    var fail = function(){ el.textContent = "No se pudo copiar"; el.style.color = "var(--pending)"; el.hidden = false; };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){ legacyCopy(text) ? done() : fail(); });
+    } else {
+      legacyCopy(text) ? done() : fail();
+    }
+  }
+  function legacyCopy(text){
+    try{
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly","");
+      ta.style.position = "fixed"; ta.style.top = "-1000px"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    }catch(e){ return false; }
+  }
+
+  // ---------- rendering ----------
+  function renderAll(){
+    renderToday();
+    renderHero();
+    renderWeeknav();
+    renderSchedule();
+    renderScheduleEditor();
+    renderExtraList();
+    renderPagos();
+    renderRatesEditor();
+    renderHistory();
+  }
+
+  function renderToday(){
+    var d = new Date();
+    var txt = DIAS[d.getDay()] + " " + d.getDate() + " de " + MESES_LARGO[d.getMonth()] + " de " + d.getFullYear();
+    document.getElementById("today-label").textContent = txt.charAt(0).toUpperCase()+txt.slice(1);
+  }
+
+  function renderHero(){
+    var wk = weekInfo(viewOffset);
+    var total = STATE.schedule.length;
+    var count = confirmedCount(wk.key);
+    var nx = nextClass();
+    var nextLine = nx ? ("<strong>" + escapeHtml(nx.day) + " " + fmtHora12(nx.time) + "</strong> · " + escapeHtml(nx.studio)) : "Sin próxima clase";
+    document.getElementById("hero").innerHTML =
+      '<div class="hero-top">' +
+        '<div><div class="hero-count num">' + count + '<small>/' + total + '</small></div>' +
+        '<div class="hero-week">' + escapeHtml(wk.label) + '</div></div>' +
+        '<div class="hero-label">' + (viewOffset===0 ? "Esta semana" : (viewOffset<0 ? "Semana pasada" : "Próxima semana")) + '<br>confirmadas</div>' +
+      '</div>' +
+      '<div class="hero-next"><span class="dot"></span>Tu próxima clase: ' + nextLine + '</div>';
+  }
+
+  function renderWeeknav(){
+    var wk = weekInfo(viewOffset);
+    document.getElementById("weeknav").innerHTML =
+      '<button class="nav-btn" id="wk-prev" type="button" aria-label="semana anterior">←</button>' +
+      '<span class="weeknav-label">' + escapeHtml(wk.label) + (viewOffset!==0 ? ' <button class="weeknav-today" id="wk-today" type="button">ir a hoy</button>' : '') + '</span>' +
+      '<button class="nav-btn" id="wk-next" type="button" aria-label="semana siguiente">→</button>';
+    document.getElementById("wk-prev").addEventListener("click", function(){ viewOffset -= 1; renderAll(); });
+    document.getElementById("wk-next").addEventListener("click", function(){ viewOffset += 1; renderAll(); });
+    var todayBtn = document.getElementById("wk-today");
+    if(todayBtn) todayBtn.addEventListener("click", function(){ viewOffset = 0; renderAll(); });
+  }
+
+  function renderSchedule(){
+    var wk = weekInfo(viewOffset);
+    var weekMap = weekMapFor(wk.key);
+    var today = todayStr();
+    var byDay = {};
+    DIAS_ORDEN.forEach(function(d){ byDay[d] = []; });
+    scheduleSorted().forEach(function(s){ if(byDay[s.day]) byDay[s.day].push(s); });
+
+    var list = document.getElementById("schedule-list");
+    if(!STATE.schedule.length){
+      list.innerHTML = '<p class="empty-hint">Tu horario está vacío. Ábrelo abajo en “Editar mi horario fijo” para agregar tus clases.</p>';
+      return;
+    }
+
+    var html = "";
+    DIAS_ORDEN.forEach(function(day){
+      var slots = byDay[day];
+      if(!slots.length) return;
+      var isToday = (viewOffset===0) && (day === DIAS[parseLocalDate(today).getDay()]);
+      html += '<div class="day-group"><div class="day-heading"><h3>' + escapeHtml(day) + '</h3>' +
+        (isToday ? '<span class="today-pill">hoy</span>' : '') + '</div>';
+      slots.forEach(function(s){
+        var on = Object.prototype.hasOwnProperty.call(weekMap, s.id);
+        var val = weekMap[s.id];
+        var pay = on ? payFor(s, val) : null;
+        var isUOO = s.studio === "UOO";
+        var metaExtra = "";
+        if(on){
+          if(isUOO){
+            metaExtra = '<div class="riders-field"><label for="riders-' + s.id + '">Riders</label>' +
+              '<input type="number" min="1" max="30" inputmode="numeric" id="riders-' + s.id + '" data-riders-slot="' + s.id + '" value="' + (val ? val : "") + '" placeholder="#"></div>' +
+              (pay != null ? '<span class="pay-hint num">≈ ' + money(pay) + '</span>' : '<span class="pay-hint pending">agrega riders</span>');
+          } else {
+            metaExtra = '<span class="pay-hint num">≈ ' + money(pay) + '</span>';
+          }
+        }
+        html += '<div class="slot-row' + (on ? ' confirmed' : '') + '">' +
+          '<span class="slot-time num">' + fmtHora12(s.time) + '</span>' +
+          '<div class="slot-meta"><span class="chip ' + studioClass(s.studio) + '">' + escapeHtml(s.studio) + '</span>' + metaExtra + '</div>' +
+          '<button type="button" class="confirm-btn' + (on ? ' on' : '') + '" data-slot="' + s.id + '">' +
+          '<span class="mark">' + (on ? "✓" : "○") + '</span>' + (on ? "Quitar" : "Confirmar") + '</button>' +
+          '</div>';
+      });
+      html += '</div>';
+    });
+    list.innerHTML = html;
+    list.querySelectorAll("[data-slot]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var slot = STATE.schedule.filter(function(s){ return s.id === btn.getAttribute("data-slot"); })[0];
+        if(slot) toggleConfirm(wk.key, slot);
+      });
+    });
+    list.querySelectorAll("[data-riders-slot]").forEach(function(input){
+      input.addEventListener("change", function(){
+        setRiders(wk.key, input.getAttribute("data-riders-slot"), input.value);
+      });
+    });
+  }
+
+  function daySelect(sel, attr){
+    return '<select ' + attr + '>' + DIAS_ORDEN.map(function(d){
+      return '<option' + (d===sel ? ' selected' : '') + '>' + d + '</option>';
+    }).join("") + '</select>';
+  }
+  function studioSelect(sel, attr){
+    return '<select ' + attr + '>' + ["Mil Barre","UOO"].map(function(o){
+      return '<option' + (o===sel ? ' selected' : '') + '>' + o + '</option>';
+    }).join("") + '</select>';
+  }
+  function fieldWrap(label, inner){
+    return '<div class="field"><label>' + label + '</label>' + inner + '</div>';
+  }
+
+  function renderScheduleEditor(){
+    var box = document.getElementById("schedule-editor");
+    var rows = scheduleSorted().map(function(s){
+      return '<div class="edit-slot" data-edit-slot="' + s.id + '">' +
+        fieldWrap("Día", daySelect(s.day, 'data-f="day"')) +
+        fieldWrap("Hora", '<input type="time" data-f="time" value="' + escapeHtml(s.time) + '">') +
+        fieldWrap("Estudio", studioSelect(s.studio, 'data-f="studio"')) +
+        '<button type="button" class="icon-del" data-del-slot="' + s.id + '" aria-label="quitar clase">✕</button>' +
+        '</div>';
+    }).join("");
+    rows += '<div class="mini-add">' +
+      fieldWrap("Día", daySelect("Lunes", 'id="n-day"')) +
+      fieldWrap("Hora", '<input type="time" id="n-time" value="07:00">') +
+      fieldWrap("Estudio", studioSelect("Mil Barre", 'id="n-studio"')) +
+      '<button type="button" class="btn" id="add-slot-btn">+ Agregar</button>' +
+      '</div>';
+    rows += '<p class="editor-hint">Si quitas una clase, tus confirmaciones ya registradas siguen contando para las quincenas pasadas.</p>';
+    box.innerHTML = rows;
+
+    box.querySelectorAll("[data-edit-slot]").forEach(function(row){
+      var id = row.getAttribute("data-edit-slot");
+      row.querySelectorAll("[data-f]").forEach(function(ctrl){
+        ctrl.addEventListener("change", function(){ updateSlotField(id, ctrl.getAttribute("data-f"), ctrl.value); });
+      });
+    });
+    box.querySelectorAll("[data-del-slot]").forEach(function(btn){
+      btn.addEventListener("click", function(){ deleteSlot(btn.getAttribute("data-del-slot")); });
+    });
+    document.getElementById("add-slot-btn").addEventListener("click", addSlotFromForm);
+  }
+
+  function renderExtraList(){
+    var extras = STATE.extras.slice().sort(function(a,b){ return b.date.localeCompare(a.date); });
+    if(!extras.length){
+      document.getElementById("extra-list").innerHTML = '<p class="empty-hint">Sin suplencias registradas todavía.</p>';
+      return;
+    }
+    document.getElementById("extra-list").innerHTML = extras.map(function(e){
+      var d = parseLocalDate(e.date);
+      return '<div class="extra-row">' +
+        '<span class="extra-date num">' + fmtCorto(d) + '</span>' +
+        '<span class="chip ' + studioClass(e.studio) + '">' + escapeHtml(e.studio) + '</span>' +
+        (e.riders ? '<span class="extra-riders num">' + e.riders + ' riders</span>' : '') +
+        '<span class="extra-amount num">' + money(e.amount) + '</span>' +
+        '<button type="button" class="del" data-extra-del="' + e.id + '" aria-label="eliminar">✕</button>' +
+        '</div>';
+    }).join("");
+    document.querySelectorAll("#extra-list [data-extra-del]").forEach(function(btn){
+      btn.addEventListener("click", function(){ deleteExtra(btn.getAttribute("data-extra-del")); });
+    });
+  }
+
+  function renderPagos(){
+    var p = payoutForQuincena(payoutQuincenaBack);
+    var qLabel = payoutQuincenaBack === 0 ? "Quincena actual" : (payoutQuincenaBack === 1 ? "Quincena pasada" : "Hace " + payoutQuincenaBack + " quincenas");
+    document.getElementById("quincena-nav").innerHTML =
+      '<button class="nav-btn" id="q-prev" type="button" aria-label="quincena anterior">←</button>' +
+      '<span class="weeknav-label">' + qLabel + '<span class="q-range">' + escapeHtml(p.label) + '</span></span>' +
+      '<button class="nav-btn" id="q-next" type="button" aria-label="quincena siguiente"' + (payoutQuincenaBack<=0 ? ' disabled' : '') + '>→</button>';
+    document.getElementById("q-prev").addEventListener("click", function(){ payoutQuincenaBack += 1; renderPagos(); });
+    var qNext = document.getElementById("q-next");
+    if(!qNext.disabled) qNext.addEventListener("click", function(){ payoutQuincenaBack -= 1; renderPagos(); });
+
+    var order = studioOrder(Object.keys(p.byStudio));
+    var parts = order.map(function(k){ return escapeHtml(k) + " " + money(p.byStudio[k].amount); });
+
+    document.getElementById("payout-card").innerHTML =
+      '<div class="payout-amount num">' + money(p.total) + '</div>' +
+      '<div class="payout-sub">' + p.count + ' clase' + (p.count===1?"":"s") + (parts.length ? " · " + parts.join(" · ") : "") + '</div>' +
+      (p.pending ? '<div class="payout-pending">' + p.pending + ' clase(s) de UOO confirmadas sin número de riders — no incluidas todavía</div>' : '');
+
+    var linesEl = document.getElementById("payout-lines");
+    if(!p.count && !p.pending){
+      linesEl.innerHTML = '<p class="empty-hint">Sin clases en esta quincena todavía.</p>';
+    } else {
+      linesEl.innerHTML = order.map(function(s){
+        var b = p.byStudio[s];
+        var items = b.items.map(function(it){
+          var mid = it.riders ? (it.riders + " riders") : (it.extra ? "extra" : "");
+          return '<div class="pl-item"><span class="pl-when num">' + fmtItemWhen(it.date, it.time) + '</span>' +
+            '<span class="pl-mid">' + mid + '</span>' +
+            '<span class="pl-amt num">' + money(it.amount) + '</span></div>';
+        }).join("");
+        var pend = b.pending.map(function(pd){
+          return '<div class="pl-item pending"><span class="pl-when num">' + fmtItemWhen(pd.date, pd.time) + '</span>' +
+            '<span class="pl-mid">falta # de riders</span><span class="pl-amt num">—</span></div>';
+        }).join("");
+        return '<div class="pl-studio"><h4><span class="chip ' + studioClass(s) + '">' + escapeHtml(s) + '</span></h4>' +
+          items + pend +
+          '<div class="pl-sub">Subtotal ' + escapeHtml(s) + ': ' + money(b.amount) + ' · ' + b.count + ' clase' + (b.count===1?"":"s") + '</div></div>';
+      }).join("");
+    }
+
+    document.getElementById("tabulador-grid").innerHTML = Object.keys(STATE.rates.uoo).sort(function(a,b){ return a-b; }).map(function(k){
+      return '<div class="tab-cell"><span class="tab-n num">' + k + '</span><span class="tab-v num">' + money(STATE.rates.uoo[k]) + '</span></div>';
+    }).join("");
+  }
+
+  function renderRatesEditor(){
+    var box = document.getElementById("rates-editor");
+    var cells = "";
+    for(var i = 1; i <= TAB_MAX; i++){
+      cells += '<div class="tab-edit-cell"><label>' + i + (i===TAB_MAX ? "+" : "") + ' riders</label>' +
+        '<input type="number" min="0" inputmode="numeric" data-tab="' + i + '" value="' + (STATE.rates.uoo[i] || 0) + '"></div>';
+    }
+    box.innerHTML =
+      '<div class="rate-line"><div class="field" style="max-width:180px"><label>Mil Barre — por clase</label>' +
+        '<input type="number" min="0" inputmode="numeric" id="rate-mb" value="' + (STATE.rates.milbarre || 0) + '"></div></div>' +
+      '<p class="editor-hint">Tabulador de UOO — cuánto paga según cuántos riders hubo:</p>' +
+      '<div class="tab-edit-grid">' + cells + '</div>' +
+      '<button type="button" class="link-btn" id="rates-reset">Restaurar valores por defecto</button>';
+
+    document.getElementById("rate-mb").addEventListener("change", function(){ setMilbarreRate(this.value); });
+    box.querySelectorAll("[data-tab]").forEach(function(inp){
+      inp.addEventListener("change", function(){ setTabRate(inp.getAttribute("data-tab"), inp.value); });
+    });
+    document.getElementById("rates-reset").addEventListener("click", resetRates);
+  }
+
+  function renderHistory(){
+    var total = STATE.schedule.length;
+    var html = "";
+    for(var i = 0; i <= 3; i++){
+      var wk = weekInfo(0 - i);
+      var count = confirmedCount(wk.key);
+      var label = i === 0 ? "Esta semana" : (i === 1 ? "Semana pasada" : "Hace " + i + " semanas");
+      html += '<div class="history-chip' + (total>0 && count===total ? ' full' : '') + '" title="' + escapeHtml(wk.label) + '">' +
+        '<span class="hc-label">' + escapeHtml(label) + '</span>' +
+        '<span class="hc-value num">' + count + '/' + total + '</span></div>';
+    }
+    document.getElementById("history-strip").innerHTML = html;
+  }
+
+  // ---------- static forms (bound once) ----------
+  function bindStudioVisibility(prefix){
+    var sel = document.getElementById(prefix + "studio");
+    function sync(){
+      var v = sel.value;
+      document.getElementById(prefix + "riders-field").hidden = v !== "UOO";
+      document.getElementById(prefix + "otro-name-field").hidden = v !== "Otro";
+      document.getElementById(prefix + "otro-amount-field").hidden = v !== "Otro";
+    }
+    sync();
+    sel.addEventListener("change", sync);
+  }
+
+  function initExtraForm(){
+    document.getElementById("ex-date").value = todayStr();
+    bindStudioVisibility("ex-");
+    document.getElementById("ex-add-btn").addEventListener("click", function(){
+      var o = readExtraForm("ex-", null);
+      if(!o) return;
+      addExtraEntry(o);
+      clearExtraForm("ex-");
+    });
+  }
+
+  function initQuickForm(){
+    var toggle = document.getElementById("quick-toggle");
+    var form = document.getElementById("quick-form");
+    var label = "➕ Di una clase extra hoy";
+    toggle.addEventListener("click", function(){
+      form.hidden = !form.hidden;
+      toggle.textContent = form.hidden ? label : "✕ Cerrar";
+    });
+    bindStudioVisibility("q-");
+    document.getElementById("q-add-btn").addEventListener("click", function(){
+      var o = readExtraForm("q-", todayStr());
+      if(!o) return;
+      addExtraEntry(o);
+      clearExtraForm("q-");
+      form.hidden = true;
+      toggle.textContent = label;
+    });
+  }
+
+  document.getElementById("copy-summary").addEventListener("click", copySummary);
+
+  initExtraForm();
+  initQuickForm();
+  renderAll();
+})();
+</script>
+</body>
+</html>
