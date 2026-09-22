@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pase de Lía</title>
-<meta name="description" content="Pase semanal de Lía — qué clases da, riders de UOO y cuánto le toca por quincena.">
+<title>Horarios de Lía</title>
+<meta name="description" content="Horario semanal de Lía — qué clases da, riders de UOO y cuánto le toca por quincena.">
 <meta name="theme-color" content="#8a3b56">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Pase de Lía">
+<meta name="apple-mobile-web-app-title" content="Horarios de Lía">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -256,7 +256,7 @@
 <body>
 <div class="gate" id="gate">
   <div class="gate-card">
-    <span class="eyebrow">Pase de Lía</span>
+    <span class="eyebrow">Horarios de Lía</span>
     <h2>Acceso privado</h2>
     <p class="section-note" style="margin:0">Escribe la contraseña que te compartió Sebas.</p>
     <form id="gate-form">
@@ -269,8 +269,8 @@
 
 <div class="wrap" id="app">
   <header>
-    <span class="eyebrow">Pase semanal · Lía</span>
-    <h1>Pase de <em>Lía</em></h1>
+    <span class="eyebrow">Horario semanal · Lía</span>
+    <h1>Horarios de <em>Lía</em></h1>
     <p class="sub" id="today-label"></p>
     <p id="save-status"><span class="spin"></span><span id="save-status-text"></span></p>
     <div id="save-note"></div>
@@ -791,7 +791,7 @@
 
   function buildSummaryText(p){
     var lines = [];
-    lines.push("Pase de Lía — " + p.label);
+    lines.push("Horarios de Lía — " + p.label);
     lines.push("");
     studioOrder(Object.keys(p.byStudio)).forEach(function(s){
       var b = p.byStudio[s];
