@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Horarios de Lía</title>
-<meta name="description" content="Horario semanal de Lía — qué clases da, riders de UOO y cuánto le toca por quincena.">
+<meta name="description" content="Horario semanal de Lía — qué clases da, en qué estudios y cuánto le toca por quincena.">
 <meta name="theme-color" content="#8a3b56">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -37,6 +37,10 @@
     --studio-uoo-soft:#dbe9ea;
     --studio-other:#6b5f7a;
     --studio-other-soft:#e6e0ee;
+    --studio-green:#4a7a3f;
+    --studio-green-soft:#e0ecd9;
+    --studio-gold:#9a7418;
+    --studio-gold-soft:#f3e8c4;
     --shadow-sm:0 1px 2px rgba(43,35,31,.08);
     --shadow-md:0 14px 34px -18px rgba(43,35,31,.35);
   }
@@ -62,6 +66,10 @@
       --studio-uoo-soft:#16292c;
       --studio-other:#b7a8d1;
       --studio-other-soft:#2b2436;
+      --studio-green:#9bc98e;
+      --studio-green-soft:#1d2d19;
+      --studio-gold:#e0bd62;
+      --studio-gold-soft:#332a10;
       --shadow-sm:0 1px 2px rgba(0,0,0,.4);
       --shadow-md:0 14px 34px -18px rgba(0,0,0,.6);
     }
@@ -137,9 +145,15 @@
   .slot-meta{flex:1;min-width:120px;display:flex;flex-direction:column;gap:5px}
   .chip{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;width:fit-content}
   .chip::before{content:"";width:6px;height:6px;border-radius:99px;background:currentColor;flex:0 0 auto}
-  .chip.milbarre{color:var(--studio-milbarre);background:var(--studio-milbarre-soft)}
-  .chip.uoo{color:var(--studio-uoo);background:var(--studio-uoo-soft)}
-  .chip.other{color:var(--studio-other);background:var(--studio-other-soft)}
+  .chip.h0{color:var(--studio-milbarre);background:var(--studio-milbarre-soft)}
+  .chip.h1{color:var(--studio-uoo);background:var(--studio-uoo-soft)}
+  .chip.h2{color:var(--studio-other);background:var(--studio-other-soft)}
+  .chip.h3{color:var(--studio-green);background:var(--studio-green-soft)}
+  .chip.h4{color:var(--studio-gold);background:var(--studio-gold-soft)}
+  .studio-card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
+  .studio-card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .studio-card-head .spacer{margin-left:auto}
+  .studio-card.off{opacity:.65}
   .confirm-btn{flex:0 0 auto;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--ink-soft);font:inherit;font-weight:700;font-size:12.5px;padding:9px 14px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:40px;transition:background .15s,border-color .15s,color .15s}
   .confirm-btn:hover{border-color:var(--accent);color:var(--accent)}
   .confirm-btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
@@ -294,18 +308,14 @@
 
   <section class="section">
     <h2>Tu horario</h2>
-    <p class="section-note">Toca una clase cuando confirmes que vas. En UOO agrega cuántos riders hubo para calcular tu pago.</p>
+    <p class="section-note">Toca una clase cuando confirmes que vas. En los estudios que pagan por riders, agrega cuántos hubo para calcular tu pago.</p>
 
     <div class="quick-extra" id="quick-extra">
       <button type="button" class="quick-toggle" id="quick-toggle">➕ Di una clase extra hoy</button>
       <div class="quick-form" id="quick-form" hidden>
         <div class="extra-form-grid">
           <div class="field"><label for="q-studio">Estudio</label>
-            <select id="q-studio">
-              <option value="Mil Barre">Mil Barre</option>
-              <option value="UOO">UOO</option>
-              <option value="Otro">Otro estudio</option>
-            </select>
+            <select id="q-studio"></select>
           </div>
           <div class="field" id="q-riders-field"><label for="q-riders">Riders</label><input type="number" min="1" max="30" inputmode="numeric" id="q-riders" placeholder="#"></div>
           <div class="field" id="q-otro-name-field" hidden><label for="q-otro-name">Nombre del estudio</label><input type="text" id="q-otro-name" placeholder="ej. Sweat"></div>
@@ -331,11 +341,7 @@
       <div class="extra-form-grid">
         <div class="field"><label for="ex-date">Fecha</label><input type="date" id="ex-date"></div>
         <div class="field"><label for="ex-studio">Estudio</label>
-          <select id="ex-studio">
-            <option value="Mil Barre">Mil Barre</option>
-            <option value="UOO">UOO</option>
-            <option value="Otro">Otro estudio</option>
-          </select>
+          <select id="ex-studio"></select>
         </div>
         <div class="field" id="ex-riders-field"><label for="ex-riders">Riders</label><input type="number" min="1" max="30" inputmode="numeric" id="ex-riders" placeholder="#"></div>
         <div class="field" id="ex-otro-name-field" hidden><label for="ex-otro-name">Nombre del estudio</label><input type="text" id="ex-otro-name" placeholder="ej. Sweat"></div>
@@ -348,7 +354,7 @@
 
   <section class="section">
     <h2>Cuánto te toca</h2>
-    <p class="section-note">Mil Barre: tarifa fija por clase. UOO: según el tabulador de riders — incluye tu horario fijo y tus suplencias. Ambos pagan quincenal.</p>
+    <p class="section-note">Cada estudio paga una tarifa fija por clase o según los riders que hubo — incluye tu horario fijo y tus clases extra. Puedes cambiar tus estudios y tarifas abajo.</p>
     <div class="quincena-nav" id="quincena-nav"></div>
     <div class="payout-card" id="payout-card"></div>
     <div class="payout-lines" id="payout-lines"></div>
@@ -357,12 +363,12 @@
       <span class="copy-status" id="copy-status" hidden></span>
     </div>
     <details class="tabulador-ref">
-      <summary>Ver tabulador de UOO (por número de riders)</summary>
-      <div class="tab-grid" id="tabulador-grid"></div>
-      <p class="tab-note">Definido hasta 16 riders — de ahí en adelante se calcula igual que 16.</p>
+      <summary>Ver mis tarifas por estudio</summary>
+      <div id="tabulador-grid"></div>
+      <p class="tab-note">Los tabuladores llegan hasta 16 riders — de ahí en adelante se calcula igual que 16.</p>
     </details>
     <details class="editor-panel" id="rates-editor-panel">
-      <summary>⚙️ Ajustar tarifas</summary>
+      <summary>🏷️ Mis estudios y tarifas</summary>
       <div class="editor-body" id="rates-editor"></div>
     </details>
   </section>
@@ -420,12 +426,19 @@
     {id:"vi-uoo-0915", day:"Viernes",   time:"09:15", studio:"UOO"},
     {id:"sa-uoo-1015", day:"Sábado",    time:"10:15", studio:"UOO"}
   ];
-  var DEFAULT_MILBARRE_RATE = 250;
   var DEFAULT_UOO_TABULADOR = {1:200,2:220,3:240,4:260,5:280,6:300,7:320,8:370,9:390,10:410,11:430,12:450,13:500,14:520,15:540,16:630};
   var TAB_MAX = 16;
+  var HUES = 5;               // colores de chip disponibles (.chip.h0 … .chip.h4)
+  var OTRO = "__otro__";      // valor del selector para "otro estudio, con monto"
+  // Estudios por defecto: pay "fixed" = tarifa fija por clase; "riders" = tabulador por # de riders.
+  function defaultStudios(){
+    return [
+      {name:"Mil Barre", pay:"fixed",  rate:250,                     hue:0, active:true},
+      {name:"UOO",       pay:"riders", tab:clone(DEFAULT_UOO_TABULADOR), hue:1, active:true}
+    ];
+  }
 
   function clone(o){ return JSON.parse(JSON.stringify(o)); }
-  function studioClass(s){ return s === "Mil Barre" ? "milbarre" : (s === "UOO" ? "uoo" : "other"); }
   function escapeHtml(s){ return String(s==null?"":s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]; }); }
   function pad(n){ return String(n).padStart(2,"0"); }
   function parseLocalDate(dateStr){ var p=dateStr.split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
@@ -494,8 +507,9 @@
   // ---------- state ----------
   // STATE.schedule = [{id, day, time, studio}]           <- horario fijo, editable
   // STATE.archived = { [slotId]: {day,time,studio} }      <- slots borrados, se guardan para no perder quincenas pasadas
-  // STATE.rates    = { milbarre:Number, uoo:{1..16:Number} }
-  // STATE.weeks[mondayKey] = { [slotId]: true (Mil Barre) | riderCount (UOO, 0 = pendiente) }
+  // STATE.studios  = [{name, pay:"fixed"|"riders", rate | tab:{1..16}, hue, active}]  <- estudios y cómo pagan
+  //                  (antes STATE.rates = {milbarre, uoo}; normalize() migra solo)
+  // STATE.weeks[mondayKey] = { [slotId]: true (tarifa fija) | riderCount (por riders, 0 = pendiente) }
   // STATE.extras   = [{id, date, studio, riders, amount}] <- suplencias / clases extra
   //
   // Persistencia: esta página es autónoma — vive en localStorage de ESTE navegador/
@@ -503,11 +517,26 @@
   var LS_KEY = "pase-de-lia-state-v2";
   function normalize(s){
     s = (s && typeof s === "object") ? s : {};
-    if(!Array.isArray(s.schedule) || !s.schedule.length) s.schedule = clone(DEFAULT_SCHEDULE);
+    if(!Array.isArray(s.schedule)) s.schedule = clone(DEFAULT_SCHEDULE);   // vacío es válido: si quitó todo, no se repone
     if(!s.archived || typeof s.archived !== "object") s.archived = {};
-    if(!s.rates || typeof s.rates !== "object") s.rates = {};
-    if(typeof s.rates.milbarre !== "number") s.rates.milbarre = DEFAULT_MILBARRE_RATE;
-    if(!s.rates.uoo || typeof s.rates.uoo !== "object") s.rates.uoo = clone(DEFAULT_UOO_TABULADOR);
+    if(!Array.isArray(s.studios)){
+      // migración desde la v2 original (tarifas fijas de Mil Barre y UOO en s.rates)
+      var r = (s.rates && typeof s.rates === "object") ? s.rates : {};
+      s.studios = defaultStudios();
+      if(typeof r.milbarre === "number") s.studios[0].rate = r.milbarre;
+      if(r.uoo && typeof r.uoo === "object") s.studios[1].tab = r.uoo;
+    }
+    delete s.rates;
+    s.studios.forEach(function(st, i){
+      if(st.pay !== "riders") st.pay = "fixed";
+      if(typeof st.hue !== "number") st.hue = i % HUES;
+      if(st.active !== false) st.active = true;
+      if(st.pay === "fixed"){ if(typeof st.rate !== "number") st.rate = 0; }
+      else {
+        if(!st.tab || typeof st.tab !== "object") st.tab = {};
+        for(var k = 1; k <= TAB_MAX; k++){ if(typeof st.tab[k] !== "number") st.tab[k] = 0; }
+      }
+    });
     if(!s.weeks || typeof s.weeks !== "object") s.weeks = {};
     if(!Array.isArray(s.extras)) s.extras = [];
     if(typeof s.updatedAt !== "number") s.updatedAt = 0;
@@ -546,18 +575,31 @@
     var map = weekMapFor(weekKey), ids = scheduleIdSet();
     return Object.keys(map).filter(function(k){ return ids[k]; }).length;
   }
+  // ---------- estudios ----------
+  function studioByName(n){ return STATE.studios.filter(function(s){ return s.name === n; })[0] || null; }
+  function activeStudios(){ return STATE.studios.filter(function(s){ return s.active; }); }
+  function studioClass(n){ var st = studioByName(n); return "h" + (st ? st.hue % HUES : 2); }
+  function isRidersStudio(n){ var st = studioByName(n); return !!st && st.pay === "riders"; }
+  function studioOptionsHtml(sel){
+    return activeStudios().map(function(st){
+      return '<option value="' + escapeHtml(st.name) + '"' + (st.name === sel ? ' selected' : '') + '>' + escapeHtml(st.name) + '</option>';
+    }).join("") + '<option value="' + OTRO + '"' + (sel === OTRO ? ' selected' : '') + '>Otro estudio…</option>';
+  }
+  // Cuánto paga una clase del estudio `slot.studio`: tarifa fija, o el tabulador según los riders.
   function payFor(slot, value){
-    if(slot.studio === "Mil Barre") return STATE.rates.milbarre;
-    if(slot.studio !== "UOO") return null;
+    var st = studioByName(slot.studio);
+    if(!st) return null;
+    if(st.pay === "fixed") return st.rate;
+    if(typeof value !== "number") return null;     // clase marcada cuando el estudio era de tarifa fija: falta el # de riders
     var n = Math.round(value);
     if(!n || n < 1) return null;
-    var capped = Math.min(n, TAB_MAX);
-    return STATE.rates.uoo[capped];
+    return st.tab[Math.min(n, TAB_MAX)];
   }
   function studioOrder(keys){
-    var pri = {"Mil Barre":0, "UOO":1};
+    var idx = {};
+    STATE.studios.forEach(function(st, i){ idx[st.name] = i; });
     return keys.slice().sort(function(a,b){
-      var pa = pri.hasOwnProperty(a) ? pri[a] : 2, pb = pri.hasOwnProperty(b) ? pri[b] : 2;
+      var pa = idx.hasOwnProperty(a) ? idx[a] : 999, pb = idx.hasOwnProperty(b) ? idx[b] : 999;
       return pa - pb || a.localeCompare(b);
     });
   }
@@ -600,13 +642,13 @@
     if(Object.prototype.hasOwnProperty.call(map, slot.id)){
       delete map[slot.id];
     } else {
-      map[slot.id] = slot.studio === "Mil Barre" ? true : 0;
+      map[slot.id] = isRidersStudio(slot.studio) ? 0 : true;
     }
     if(Object.keys(map).length) newWeeks[weekKey] = map; else delete newWeeks[weekKey];
     STATE = Object.assign({}, STATE, {weeks:newWeeks});
     renderAll();
     publishState();
-    if(slot.studio === "UOO" && Object.prototype.hasOwnProperty.call(map, slot.id)){
+    if(isRidersStudio(slot.studio) && Object.prototype.hasOwnProperty.call(map, slot.id)){
       var el = document.getElementById("riders-" + slot.id);
       if(el) el.focus();
     }
@@ -650,6 +692,7 @@
     var day = document.getElementById("n-day").value;
     var time = document.getElementById("n-time").value || "07:00";
     var studio = document.getElementById("n-studio").value;
+    if(!studio){ showSaveNote("Primero agrega un estudio en “Mis estudios y tarifas”.", "bad"); return; }
     var entry = {id:newSlotId(), day:day, time:time, studio:studio};
     STATE = Object.assign({}, STATE, {schedule: STATE.schedule.concat([entry])});
     renderAll();
@@ -668,23 +711,89 @@
     publishState();
   }
 
-  // -- tarifas --
-  function setMilbarreRate(v){
-    var n = parseInt(v, 10); if(isNaN(n) || n < 0) n = 0;
-    var rates = Object.assign({}, STATE.rates, {milbarre:n});
-    STATE = Object.assign({}, STATE, {rates:rates});
+  // -- estudios y tarifas --
+  function updateStudio(name, patch){
+    STATE = Object.assign({}, STATE, {studios: STATE.studios.map(function(st){
+      return st.name === name ? Object.assign({}, st, patch) : st;
+    })});
+  }
+  function toAmount(v){ var n = parseInt(v, 10); return (isNaN(n) || n < 0) ? 0 : n; }
+  function setStudioRate(name, v){
+    updateStudio(name, {rate: toAmount(v)});
     renderSchedule(); renderPagos();
     publishState();
   }
-  function setTabRate(k, v){
-    var n = parseInt(v, 10); if(isNaN(n) || n < 0) n = 0;
-    var uoo = Object.assign({}, STATE.rates.uoo); uoo[k] = n;
-    STATE = Object.assign({}, STATE, {rates: Object.assign({}, STATE.rates, {uoo:uoo})});
+  function setStudioTab(name, k, v){
+    var st = studioByName(name); if(!st) return;
+    var tab = Object.assign({}, st.tab); tab[k] = toAmount(v);
+    updateStudio(name, {tab: tab});
     renderSchedule(); renderPagos();
     publishState();
   }
-  function resetRates(){
-    STATE = Object.assign({}, STATE, {rates:{milbarre:DEFAULT_MILBARRE_RATE, uoo:clone(DEFAULT_UOO_TABULADOR)}});
+  function setStudioPay(name, pay){
+    var st = studioByName(name); if(!st || st.pay === pay) return;
+    updateStudio(name, {pay: pay});
+    normalizeStudios();
+    renderAll();
+    publishState();
+  }
+  function normalizeStudios(){ STATE = normalize(STATE); }   // completa rate/tab que falten tras cambiar de modelo
+  function addStudioFromForm(){
+    var nameEl = document.getElementById("ns-name"), msg = document.getElementById("ns-msg");
+    var name = nameEl.value.trim(), pay = document.getElementById("ns-pay").value;
+    msg.textContent = "";
+    if(!name || name === OTRO){ flashFieldError("ns-name"); return; }
+    var same = STATE.studios.filter(function(s){ return s.name.toLowerCase() === name.toLowerCase(); })[0];
+    if(same){
+      if(!same.active){ restoreStudio(same.name); return; }
+      flashFieldError("ns-name"); msg.textContent = "Ya tienes un estudio con ese nombre."; return;
+    }
+    var rate = parseInt(document.getElementById("ns-rate").value, 10);
+    if(pay === "fixed" && (isNaN(rate) || rate < 0)){ flashFieldError("ns-rate"); msg.textContent = "Escribe cuánto te paga por clase."; return; }
+    var used = {}; activeStudios().forEach(function(s){ used[s.hue % HUES] = true; });
+    var hue = STATE.studios.length % HUES;
+    for(var h = 0; h < HUES; h++){ if(!used[h]){ hue = h; break; } }
+    var st = {name: name, pay: pay, hue: hue, active: true};
+    if(pay === "fixed") st.rate = rate;
+    STATE = Object.assign({}, STATE, {studios: STATE.studios.concat([st])});
+    normalizeStudios();
+    renderAll();
+    publishState();
+  }
+  function archiveStudio(name){
+    var mine = STATE.schedule.filter(function(s){ return s.studio === name; });
+    var q = 'Quitar "' + name + '"' + (mine.length ? " también quita sus " + mine.length + " clase(s) fijas de tu horario" : "") +
+      ". Lo que ya registraste sigue contando en tus quincenas. ¿Continuar?";
+    if(!window.confirm(q)) return;
+    var arch = Object.assign({}, STATE.archived);
+    mine.forEach(function(s){ arch[s.id] = {day:s.day, time:s.time, studio:s.studio}; });
+    STATE = Object.assign({}, STATE, {
+      schedule: STATE.schedule.filter(function(s){ return s.studio !== name; }),
+      archived: arch
+    });
+    updateStudio(name, {active: false});
+    if(editingSlotId && !STATE.schedule.some(function(s){ return s.id === editingSlotId; })) editingSlotId = null;
+    renderAll();
+    publishState();
+  }
+  function restoreStudio(name){
+    updateStudio(name, {active: true});
+    renderAll();
+    publishState();
+  }
+  function renameStudio(oldName, newName){
+    newName = (newName || "").trim();
+    if(!newName || newName === oldName) return;
+    if(newName === OTRO || studioByName(newName)){ showSaveNote("Ya tienes un estudio con ese nombre.", "bad"); return; }
+    function ren(o){ return o.studio === oldName ? Object.assign({}, o, {studio: newName}) : o; }
+    var arch = {};
+    Object.keys(STATE.archived).forEach(function(id){ arch[id] = ren(STATE.archived[id]); });
+    STATE = Object.assign({}, STATE, {
+      studios: STATE.studios.map(function(st){ return st.name === oldName ? Object.assign({}, st, {name: newName}) : st; }),
+      schedule: STATE.schedule.map(ren),
+      archived: arch,
+      extras: STATE.extras.map(ren)
+    });
     renderAll();
     publishState();
   }
@@ -702,18 +811,19 @@
   function readExtraForm(prefix, dateFallback){
     var g = function(suf){ return document.getElementById(prefix + suf); };
     var studio = g("studio").value, finalStudio = studio, amount = 0, riders = null;
-    if(studio === "Mil Barre"){
-      amount = STATE.rates.milbarre;
-    } else if(studio === "UOO"){
-      var rv = parseInt(g("riders").value, 10);
-      if(!rv || rv < 1){ flashFieldError(prefix + "riders"); return null; }
-      riders = rv; amount = payFor({studio:"UOO"}, rv);
-    } else {
+    var st = studioByName(studio);
+    if(studio === OTRO || !st){
       var name = g("otro-name").value.trim();
       var amt = parseFloat(g("otro-amount").value);
       if(!name){ flashFieldError(prefix + "otro-name"); return null; }
       if(!amt || amt <= 0){ flashFieldError(prefix + "otro-amount"); return null; }
       finalStudio = name; amount = amt;
+    } else if(st.pay === "riders"){
+      var rv = parseInt(g("riders").value, 10);
+      if(!rv || rv < 1){ flashFieldError(prefix + "riders"); return null; }
+      riders = rv; amount = payFor({studio: studio}, rv);
+    } else {
+      amount = st.rate;
     }
     var dateEl = g("date"), timeEl = g("time");
     return {date: (dateEl && dateEl.value) || dateFallback || todayStr(), time: (timeEl && timeEl.value) || null, studio: finalStudio, riders: riders, amount: amount};
@@ -779,7 +889,7 @@
         }
         total += pay; count++;
         b.amount += pay; b.count++;
-        b.items.push({date:toDateStr(date), time:slot.time, riders:(slot.studio === "UOO" ? Math.round(val) : null), amount:pay});
+        b.items.push({date:toDateStr(date), time:slot.time, riders:(isRidersStudio(slot.studio) ? Math.round(val) : null), amount:pay});
       });
     });
 
@@ -821,7 +931,7 @@
       lines.push("");
     });
     lines.push("TOTAL: " + money(p.total) + " (" + p.count + " clase" + (p.count===1?"":"s") + ")");
-    if(p.pending) lines.push("Pendiente: " + p.pending + " clase(s) de UOO sin # de riders — aún no sumadas");
+    if(p.pending) lines.push("Pendiente: " + p.pending + " clase(s) sin # de riders — aún no sumadas");
     return lines.join("\n");
   }
 
@@ -853,6 +963,7 @@
 
   // ---------- rendering ----------
   function renderAll(){
+    populateStudioSelects();
     renderToday();
     renderHero();
     renderWeeknav();
@@ -905,7 +1016,7 @@
       '<input type="hidden" id="dx-date" value="' + dateStr + '">' +
       '<div class="field"><label for="dx-time">Hora (opcional)</label><input type="time" id="dx-time"></div>' +
       '<div class="field"><label for="dx-studio">Estudio</label>' +
-        '<select id="dx-studio"><option value="Mil Barre">Mil Barre</option><option value="UOO">UOO</option><option value="Otro">Otro estudio</option></select></div>' +
+        '<select id="dx-studio">' + studioOptionsHtml() + '</select></div>' +
       '<div class="field" id="dx-riders-field"><label for="dx-riders">Riders</label><input type="number" min="1" max="30" inputmode="numeric" id="dx-riders" placeholder="#"></div>' +
       '<div class="field" id="dx-otro-name-field" hidden><label for="dx-otro-name">Nombre del estudio</label><input type="text" id="dx-otro-name" placeholder="ej. Sweat"></div>' +
       '<div class="field" id="dx-otro-amount-field" hidden><label for="dx-otro-amount">Monto</label><input type="number" min="0" inputmode="numeric" id="dx-otro-amount" placeholder="$"></div>' +
@@ -955,12 +1066,12 @@
         var on = Object.prototype.hasOwnProperty.call(weekMap, s.id);
         var val = weekMap[s.id];
         var pay = on ? payFor(s, val) : null;
-        var isUOO = s.studio === "UOO";
+        var byRiders = isRidersStudio(s.studio);
         var metaExtra = "";
         if(on){
-          if(isUOO){
+          if(byRiders){
             metaExtra = '<div class="riders-field"><label for="riders-' + s.id + '">Riders</label>' +
-              '<input type="number" min="1" max="30" inputmode="numeric" id="riders-' + s.id + '" data-riders-slot="' + s.id + '" value="' + (val ? val : "") + '" placeholder="#"></div>' +
+              '<input type="number" min="1" max="30" inputmode="numeric" id="riders-' + s.id + '" data-riders-slot="' + s.id + '" value="' + (typeof val === "number" && val ? val : "") + '" placeholder="#"></div>' +
               (pay != null ? '<span class="pay-hint num">≈ ' + money(pay) + '</span>' : '<span class="pay-hint pending">agrega riders</span>');
           } else {
             metaExtra = '<span class="pay-hint num">≈ ' + money(pay) + '</span>';
@@ -1050,8 +1161,10 @@
     }).join("") + '</select>';
   }
   function studioSelect(sel, attr){
-    return '<select ' + attr + '>' + ["Mil Barre","UOO"].map(function(o){
-      return '<option' + (o===sel ? ' selected' : '') + '>' + o + '</option>';
+    var names = activeStudios().map(function(s){ return s.name; });
+    if(sel && names.indexOf(sel) < 0) names.push(sel);
+    return '<select ' + attr + '>' + names.map(function(o){
+      return '<option value="' + escapeHtml(o) + '"' + (o===sel ? ' selected' : '') + '>' + escapeHtml(o) + '</option>';
     }).join("") + '</select>';
   }
   function fieldWrap(label, inner){
@@ -1071,7 +1184,7 @@
     rows += '<div class="mini-add">' +
       fieldWrap("Día", daySelect("Lunes", 'id="n-day"')) +
       fieldWrap("Hora", '<input type="time" id="n-time" value="07:00">') +
-      fieldWrap("Estudio", studioSelect("Mil Barre", 'id="n-studio"')) +
+      fieldWrap("Estudio", studioSelect((activeStudios()[0] || {}).name, 'id="n-studio"')) +
       '<button type="button" class="btn" id="add-slot-btn">+ Agregar</button>' +
       '</div>';
     rows += '<p class="editor-hint">Si quitas una clase, tus confirmaciones ya registradas siguen contando para las quincenas pasadas.</p>';
@@ -1127,7 +1240,7 @@
     document.getElementById("payout-card").innerHTML =
       '<div class="payout-amount num">' + money(p.total) + '</div>' +
       '<div class="payout-sub">' + p.count + ' clase' + (p.count===1?"":"s") + (parts.length ? " · " + parts.join(" · ") : "") + '</div>' +
-      (p.pending ? '<div class="payout-pending">' + p.pending + ' clase(s) de UOO confirmadas sin número de riders — no incluidas todavía</div>' : '');
+      (p.pending ? '<div class="payout-pending">' + p.pending + ' clase(s) confirmadas sin número de riders — no incluidas todavía</div>' : '');
 
     var linesEl = document.getElementById("payout-lines");
     if(!p.count && !p.pending){
@@ -1151,30 +1264,87 @@
       }).join("");
     }
 
-    document.getElementById("tabulador-grid").innerHTML = Object.keys(STATE.rates.uoo).sort(function(a,b){ return a-b; }).map(function(k){
-      return '<div class="tab-cell"><span class="tab-n num">' + k + '</span><span class="tab-v num">' + money(STATE.rates.uoo[k]) + '</span></div>';
-    }).join("");
+    document.getElementById("tabulador-grid").innerHTML = activeStudios().map(function(st){
+      if(st.pay === "fixed"){
+        return '<p class="tab-note" style="padding:0 0 10px"><span class="chip ' + studioClass(st.name) + '">' + escapeHtml(st.name) + '</span> ' + money(st.rate) + ' por clase</p>';
+      }
+      var cells = Object.keys(st.tab).sort(function(a,b){ return a-b; }).map(function(k){
+        return '<div class="tab-cell"><span class="tab-n num">' + k + '</span><span class="tab-v num">' + money(st.tab[k]) + '</span></div>';
+      }).join("");
+      return '<div class="pl-studio"><h4><span class="chip ' + studioClass(st.name) + '">' + escapeHtml(st.name) + '</span> <span class="tab-note" style="padding:0">por # de riders</span></h4><div class="tab-grid">' + cells + '</div></div>';
+    }).join("") || '<p class="empty-hint">Aún no tienes estudios. Agrégalos en “Mis estudios y tarifas”.</p>';
   }
 
+  // Panel "Mis estudios y tarifas": cada estudio paga tarifa fija o por # de riders; se pueden agregar, renombrar y quitar.
   function renderRatesEditor(){
     var box = document.getElementById("rates-editor");
-    var cells = "";
-    for(var i = 1; i <= TAB_MAX; i++){
-      cells += '<div class="tab-edit-cell"><label>' + i + (i===TAB_MAX ? "+" : "") + ' riders</label>' +
-        '<input type="number" min="0" inputmode="numeric" data-tab="' + i + '" value="' + (STATE.rates.uoo[i] || 0) + '"></div>';
-    }
-    box.innerHTML =
-      '<div class="rate-line"><div class="field" style="max-width:180px"><label>Mil Barre — por clase</label>' +
-        '<input type="number" min="0" inputmode="numeric" id="rate-mb" value="' + (STATE.rates.milbarre || 0) + '"></div></div>' +
-      '<p class="editor-hint">Tabulador de UOO — cuánto paga según cuántos riders hubo:</p>' +
-      '<div class="tab-edit-grid">' + cells + '</div>' +
-      '<button type="button" class="link-btn" id="rates-reset">Restaurar valores por defecto</button>';
-
-    document.getElementById("rate-mb").addEventListener("change", function(){ setMilbarreRate(this.value); });
-    box.querySelectorAll("[data-tab]").forEach(function(inp){
-      inp.addEventListener("change", function(){ setTabRate(inp.getAttribute("data-tab"), inp.value); });
+    var html = "";
+    STATE.studios.forEach(function(st, i){
+      if(!st.active) return;
+      var body;
+      if(st.pay === "fixed"){
+        body = '<div class="field" style="max-width:200px"><label>Tarifa por clase</label>' +
+          '<input type="number" min="0" inputmode="numeric" data-rate="' + i + '" value="' + st.rate + '"></div>';
+      } else {
+        var cells = "";
+        for(var k = 1; k <= TAB_MAX; k++){
+          cells += '<div class="tab-edit-cell"><label>' + k + (k===TAB_MAX ? "+" : "") + ' riders</label>' +
+            '<input type="number" min="0" inputmode="numeric" data-tab="' + i + ':' + k + '" value="' + st.tab[k] + '"></div>';
+        }
+        body = '<p class="editor-hint" style="margin:0">Cuánto te paga según cuántos riders hubo:</p><div class="tab-edit-grid">' + cells + '</div>';
+      }
+      html += '<div class="studio-card"><div class="studio-card-head">' +
+        '<span class="chip ' + studioClass(st.name) + '">' + escapeHtml(st.name) + '</span><span class="spacer"></span>' +
+        '<button type="button" class="link-btn" data-rename="' + i + '">Renombrar</button>' +
+        '<button type="button" class="link-btn" data-archive="' + i + '">Quitar</button></div>' +
+        '<div class="field" style="max-width:240px"><label>Cómo te paga</label>' +
+          '<select data-pay="' + i + '"><option value="fixed"' + (st.pay==="fixed" ? " selected" : "") + '>Tarifa fija por clase</option>' +
+          '<option value="riders"' + (st.pay==="riders" ? " selected" : "") + '>Según número de riders</option></select></div>' +
+        body + '</div>';
     });
-    document.getElementById("rates-reset").addEventListener("click", resetRates);
+    if(!html) html = '<p class="empty-hint">No tienes estudios activos. Agrega uno aquí abajo.</p>';
+
+    html += '<div class="card" style="margin-top:2px"><p class="editor-hint" style="margin:0 0 10px"><b>Agregar un estudio</b> — por ejemplo Casa Viva, o el nuevo donde empieces.</p>' +
+      '<div class="extra-form-grid">' +
+        '<div class="field"><label for="ns-name">Nombre</label><input type="text" id="ns-name" placeholder="ej. Casa Viva"></div>' +
+        '<div class="field"><label for="ns-pay">Cómo te paga</label><select id="ns-pay"><option value="fixed">Tarifa fija por clase</option><option value="riders">Según número de riders</option></select></div>' +
+        '<div class="field" id="ns-rate-field"><label for="ns-rate">Tarifa por clase</label><input type="number" min="0" inputmode="numeric" id="ns-rate" placeholder="$"></div>' +
+        '<button class="btn" type="button" id="ns-add-btn">+ Agregar estudio</button>' +
+      '</div><p class="editor-hint" id="ns-msg" style="margin:8px 0 0"></p></div>';
+
+    var gone = STATE.studios.map(function(st, i){ return st.active ? "" :
+      '<div class="studio-card-head"><span class="chip ' + studioClass(st.name) + '">' + escapeHtml(st.name) + '</span><span class="spacer"></span>' +
+      '<button type="button" class="link-btn" data-restore="' + i + '">Restaurar</button></div>'; }).join("");
+    if(gone) html += '<div class="studio-card off"><p class="editor-hint" style="margin:0">Estudios quitados — lo que registraste con ellos sigue contando en tus quincenas.</p>' + gone + '</div>';
+
+    box.innerHTML = html;
+
+    box.querySelectorAll("[data-rate]").forEach(function(inp){
+      inp.addEventListener("change", function(){ setStudioRate(STATE.studios[+inp.getAttribute("data-rate")].name, inp.value); });
+    });
+    box.querySelectorAll("[data-tab]").forEach(function(inp){
+      var p = inp.getAttribute("data-tab").split(":");
+      inp.addEventListener("change", function(){ setStudioTab(STATE.studios[+p[0]].name, p[1], inp.value); });
+    });
+    box.querySelectorAll("[data-pay]").forEach(function(sel){
+      sel.addEventListener("change", function(){ setStudioPay(STATE.studios[+sel.getAttribute("data-pay")].name, sel.value); });
+    });
+    box.querySelectorAll("[data-rename]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var old = STATE.studios[+btn.getAttribute("data-rename")].name;
+        var nuevo = window.prompt("Nuevo nombre para “" + old + "”:", old);
+        if(nuevo != null) renameStudio(old, nuevo);
+      });
+    });
+    box.querySelectorAll("[data-archive]").forEach(function(btn){
+      btn.addEventListener("click", function(){ archiveStudio(STATE.studios[+btn.getAttribute("data-archive")].name); });
+    });
+    box.querySelectorAll("[data-restore]").forEach(function(btn){
+      btn.addEventListener("click", function(){ restoreStudio(STATE.studios[+btn.getAttribute("data-restore")].name); });
+    });
+    var nsPay = document.getElementById("ns-pay");
+    nsPay.addEventListener("change", function(){ document.getElementById("ns-rate-field").hidden = nsPay.value !== "fixed"; });
+    document.getElementById("ns-add-btn").addEventListener("click", addStudioFromForm);
   }
 
   function renderHistory(){
@@ -1192,16 +1362,27 @@
   }
 
   // ---------- static forms (bound once) ----------
+  var studioSyncers = {};
   function bindStudioVisibility(prefix){
     var sel = document.getElementById(prefix + "studio");
     function sync(){
       var v = sel.value;
-      document.getElementById(prefix + "riders-field").hidden = v !== "UOO";
-      document.getElementById(prefix + "otro-name-field").hidden = v !== "Otro";
-      document.getElementById(prefix + "otro-amount-field").hidden = v !== "Otro";
+      document.getElementById(prefix + "riders-field").hidden = !(v !== OTRO && isRidersStudio(v));
+      document.getElementById(prefix + "otro-name-field").hidden = v !== OTRO;
+      document.getElementById(prefix + "otro-amount-field").hidden = v !== OTRO;
     }
+    studioSyncers[prefix] = sync;
     sync();
     sel.addEventListener("change", sync);
+  }
+  // Rellena los selectores de estudio de los formularios fijos con los estudios activos.
+  function populateStudioSelects(){
+    ["q-", "ex-"].forEach(function(prefix){
+      var el = document.getElementById(prefix + "studio");
+      if(!el) return;
+      el.innerHTML = studioOptionsHtml(el.value);
+      if(studioSyncers[prefix]) studioSyncers[prefix]();
+    });
   }
 
   function initExtraForm(){
@@ -1233,6 +1414,32 @@
       toggle.textContent = label;
     });
   }
+
+  // ---------- actualización automática ----------
+  // Al abrir la app (o volver a ella desde otra) revisa si hay una versión nueva publicada y se
+  // recarga sola. Tus datos viven en el teléfono, así que recargar no pierde nada.
+  var APP_VERSION = "2026-11-19.1";
+  var lastUpdateCheck = 0;
+  function checkForUpdate(){
+    var now = Date.now();
+    if(now - lastUpdateCheck < 60000 || !window.fetch) return;
+    lastUpdateCheck = now;
+    fetch(location.pathname + "?_=" + now, {cache: "no-store"})
+      .then(function(r){ return r.ok ? r.text() : ""; })
+      .then(function(t){
+        var m = t.match(new RegExp("APP_" + "VERSION = \"([^\"]+)\""));
+        if(!m || m[1] === APP_VERSION) return;
+        var ae = document.activeElement;
+        if(ae && /^(INPUT|SELECT|TEXTAREA)$/.test(ae.tagName)){ lastUpdateCheck = 0; return; }   // si está escribiendo, espera
+        document.getElementById("save-status-text").textContent = "Actualizando la app…";
+        document.getElementById("save-status").className = "saved show";
+        location.replace(location.pathname + "?v=" + encodeURIComponent(m[1]));
+      })
+      .catch(function(){});
+  }
+  document.addEventListener("visibilitychange", function(){ if(!document.hidden) checkForUpdate(); });
+  setTimeout(checkForUpdate, 1500);
+  setInterval(checkForUpdate, 10 * 60000);
 
   document.getElementById("copy-summary").addEventListener("click", copySummary);
 
