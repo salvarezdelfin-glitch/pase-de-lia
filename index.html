@@ -118,6 +118,17 @@
   .day-group{margin-bottom:16px}
   .day-heading{display:flex;align-items:center;gap:8px;margin-bottom:8px}
   .day-heading h3{font-family:'Fraunces',ui-serif,serif;font-weight:600;font-style:italic;font-size:17px;margin:0;color:var(--ink)}
+  .day-date{font-size:12px;color:var(--ink-faint)}
+  .day-add{margin-left:auto;border:1px dashed var(--line-strong);background:var(--paper-raised);color:var(--ink-soft);font:inherit;font-weight:700;font-size:12px;padding:6px 11px;border-radius:9px;cursor:pointer;white-space:nowrap}
+  .day-add:hover{border-color:var(--accent);color:var(--accent)}
+  .day-group.no-slots{margin-bottom:10px}
+  .day-extra-form{background:var(--paper-raised);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:8px;box-shadow:var(--shadow-sm)}
+  .icon-edit{margin-left:auto;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink-faint);border-radius:8px;width:34px;height:34px;cursor:pointer;font-size:14px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+  .icon-edit:hover{border-color:var(--accent);color:var(--accent)}
+  .slot-row.is-extra{border-style:dashed}
+  .slot-edit-wrap{background:var(--paper-raised);border:1px solid var(--line-strong);border-radius:14px;padding:12px 14px;margin:-2px 0 8px;box-shadow:var(--shadow-sm)}
+  .slot-edit-wrap .edit-slot{border-bottom:0;padding-bottom:0}
+  .slot-edit-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
   .today-pill{font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:99px}
 
   .slot-row{display:flex;align-items:center;gap:12px;background:var(--paper-raised);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:8px;box-shadow:var(--shadow-sm);flex-wrap:wrap}
@@ -682,7 +693,7 @@
   function addExtraEntry(o){
     var entry = {
       id: "ex-" + Date.now() + "-" + Math.random().toString(36).slice(2,7),
-      date: o.date, studio: o.studio, riders: (o.riders != null ? o.riders : null), amount: o.amount
+      date: o.date, time: o.time || null, studio: o.studio, riders: (o.riders != null ? o.riders : null), amount: o.amount
     };
     STATE = Object.assign({}, STATE, {extras: STATE.extras.concat([entry])});
     renderAll();
@@ -704,8 +715,8 @@
       if(!amt || amt <= 0){ flashFieldError(prefix + "otro-amount"); return null; }
       finalStudio = name; amount = amt;
     }
-    var dateEl = g("date");
-    return {date: (dateEl && dateEl.value) || dateFallback || todayStr(), studio: finalStudio, riders: riders, amount: amount};
+    var dateEl = g("date"), timeEl = g("time");
+    return {date: (dateEl && dateEl.value) || dateFallback || todayStr(), time: (timeEl && timeEl.value) || null, studio: finalStudio, riders: riders, amount: amount};
   }
   function clearExtraForm(prefix){
     ["riders","otro-name","otro-amount"].forEach(function(suf){
@@ -778,7 +789,7 @@
       var b = bucket(e.studio);
       total += e.amount; count++;
       b.amount += e.amount; b.count++;
-      b.items.push({date:e.date, time:null, riders:e.riders || null, amount:e.amount, extra:true});
+      b.items.push({date:e.date, time:e.time || null, riders:e.riders || null, amount:e.amount, extra:true});
     });
 
     Object.keys(byStudio).forEach(function(s){
@@ -886,6 +897,32 @@
     if(todayBtn) todayBtn.addEventListener("click", function(){ viewOffset = 0; renderAll(); });
   }
 
+  var openExtraDate = null;   // fecha (YYYY-MM-DD) del día con el formulario de clase extra abierto
+  var editingSlotId = null;   // clase fija que se está editando en su sitio
+
+  function extraFormHtml(dateStr){
+    return '<div class="day-extra-form"><div class="extra-form-grid">' +
+      '<input type="hidden" id="dx-date" value="' + dateStr + '">' +
+      '<div class="field"><label for="dx-time">Hora (opcional)</label><input type="time" id="dx-time"></div>' +
+      '<div class="field"><label for="dx-studio">Estudio</label>' +
+        '<select id="dx-studio"><option value="Mil Barre">Mil Barre</option><option value="UOO">UOO</option><option value="Otro">Otro estudio</option></select></div>' +
+      '<div class="field" id="dx-riders-field"><label for="dx-riders">Riders</label><input type="number" min="1" max="30" inputmode="numeric" id="dx-riders" placeholder="#"></div>' +
+      '<div class="field" id="dx-otro-name-field" hidden><label for="dx-otro-name">Nombre del estudio</label><input type="text" id="dx-otro-name" placeholder="ej. Sweat"></div>' +
+      '<div class="field" id="dx-otro-amount-field" hidden><label for="dx-otro-amount">Monto</label><input type="number" min="0" inputmode="numeric" id="dx-otro-amount" placeholder="$"></div>' +
+      '<button class="btn" type="button" id="dx-add-btn">Agregar</button>' +
+      '</div><p class="editor-hint" style="margin-top:8px">Se suma a tu pago de la quincena como clase extra de este día.</p></div>';
+  }
+
+  function slotEditorHtml(s){
+    return '<div class="slot-edit-wrap"><div class="edit-slot" data-edit-slot="' + s.id + '">' +
+      fieldWrap("Día", daySelect(s.day, 'data-f="day"')) +
+      fieldWrap("Hora", '<input type="time" data-f="time" value="' + escapeHtml(s.time) + '">') +
+      fieldWrap("Estudio", studioSelect(s.studio, 'data-f="studio"')) +
+      '<button type="button" class="icon-del" data-del-slot-inline="' + s.id + '" aria-label="quitar clase">✕</button></div>' +
+      '<div class="slot-edit-foot"><span class="editor-hint">Esto cambia tu horario fijo. ✕ quita la clase.</span>' +
+      '<button type="button" class="link-btn" data-close-edit="1">Listo</button></div></div>';
+  }
+
   function renderSchedule(){
     var wk = weekInfo(viewOffset);
     var weekMap = weekMapFor(wk.key);
@@ -895,18 +932,25 @@
     scheduleSorted().forEach(function(s){ if(byDay[s.day]) byDay[s.day].push(s); });
 
     var list = document.getElementById("schedule-list");
+    var html = "";
     if(!STATE.schedule.length){
-      list.innerHTML = '<p class="empty-hint">Tu horario está vacío. Ábrelo abajo en “Editar mi horario fijo” para agregar tus clases.</p>';
-      return;
+      html += '<p class="empty-hint">Tu horario fijo está vacío. Toca ✏️ en una clase o usa “Editar mi horario fijo” abajo para agregar las tuyas.</p>';
     }
 
-    var html = "";
     DIAS_ORDEN.forEach(function(day){
       var slots = byDay[day];
-      if(!slots.length) return;
-      var isToday = (viewOffset===0) && (day === DIAS[parseLocalDate(today).getDay()]);
-      html += '<div class="day-group"><div class="day-heading"><h3>' + escapeHtml(day) + '</h3>' +
-        (isToday ? '<span class="today-pill">hoy</span>' : '') + '</div>';
+      var dateStr = toDateStr(dateForSlotInWeek(wk.monday, day));
+      var dayExtras = STATE.extras.filter(function(e){ return e.date === dateStr; }).sort(function(a,b){
+        return String(a.time || "").localeCompare(String(b.time || ""));
+      });
+      var isToday = dateStr === today;
+      var formOpen = openExtraDate === dateStr;
+      html += '<div class="day-group' + (!slots.length && !dayExtras.length ? ' no-slots' : '') + '"><div class="day-heading"><h3>' + escapeHtml(day) + '</h3>' +
+        '<span class="day-date num">' + parseLocalDate(dateStr).getDate() + '</span>' +
+        (isToday ? '<span class="today-pill">hoy</span>' : '') +
+        '<button type="button" class="day-add" data-add-extra="' + dateStr + '">' + (formOpen ? "✕ Cerrar" : "➕ Clase extra") + '</button></div>';
+      if(formOpen) html += extraFormHtml(dateStr);
+
       slots.forEach(function(s){
         var on = Object.prototype.hasOwnProperty.call(weekMap, s.id);
         var val = weekMap[s.id];
@@ -925,13 +969,25 @@
         html += '<div class="slot-row' + (on ? ' confirmed' : '') + '">' +
           '<span class="slot-time num">' + fmtHora12(s.time) + '</span>' +
           '<div class="slot-meta"><span class="chip ' + studioClass(s.studio) + '">' + escapeHtml(s.studio) + '</span>' + metaExtra + '</div>' +
+          '<button type="button" class="icon-edit" data-edit-btn="' + s.id + '" aria-label="editar esta clase">✏️</button>' +
           '<button type="button" class="confirm-btn' + (on ? ' on' : '') + '" data-slot="' + s.id + '">' +
           '<span class="mark">' + (on ? "✓" : "○") + '</span>' + (on ? "Quitar" : "Confirmar") + '</button>' +
+          '</div>';
+        if(editingSlotId === s.id) html += slotEditorHtml(s);
+      });
+
+      dayExtras.forEach(function(e){
+        html += '<div class="slot-row is-extra confirmed">' +
+          '<span class="slot-time num">' + (e.time ? fmtHora12(e.time) : "—") + '</span>' +
+          '<div class="slot-meta"><span class="chip ' + studioClass(e.studio) + '">' + escapeHtml(e.studio) + '</span>' +
+          '<span class="pay-hint num">extra' + (e.riders ? ' · ' + e.riders + ' riders' : '') + ' · ' + money(e.amount) + '</span></div>' +
+          '<button type="button" class="icon-edit" data-del-extra="' + e.id + '" aria-label="quitar clase extra">✕</button>' +
           '</div>';
       });
       html += '</div>';
     });
     list.innerHTML = html;
+
     list.querySelectorAll("[data-slot]").forEach(function(btn){
       btn.addEventListener("click", function(){
         var slot = STATE.schedule.filter(function(s){ return s.id === btn.getAttribute("data-slot"); })[0];
@@ -942,6 +998,49 @@
       input.addEventListener("change", function(){
         setRiders(wk.key, input.getAttribute("data-riders-slot"), input.value);
       });
+    });
+
+    // clase extra por día
+    list.querySelectorAll("[data-add-extra]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var d = btn.getAttribute("data-add-extra");
+        openExtraDate = (openExtraDate === d) ? null : d;
+        renderSchedule();
+      });
+    });
+    if(openExtraDate && document.getElementById("dx-add-btn")){
+      bindStudioVisibility("dx-");
+      document.getElementById("dx-add-btn").addEventListener("click", function(){
+        var o = readExtraForm("dx-", openExtraDate);
+        if(!o) return;
+        openExtraDate = null;
+        addExtraEntry(o);
+      });
+    }
+    list.querySelectorAll("[data-del-extra]").forEach(function(btn){
+      btn.addEventListener("click", function(){ deleteExtra(btn.getAttribute("data-del-extra")); });
+    });
+
+    // editar una clase fija en su sitio
+    list.querySelectorAll("[data-edit-btn]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var id = btn.getAttribute("data-edit-btn");
+        editingSlotId = (editingSlotId === id) ? null : id;
+        renderSchedule();
+      });
+    });
+    list.querySelectorAll("[data-edit-slot] [data-f]").forEach(function(ctrl){
+      var id = ctrl.closest("[data-edit-slot]").getAttribute("data-edit-slot");
+      ctrl.addEventListener("change", function(){ updateSlotField(id, ctrl.getAttribute("data-f"), ctrl.value); });
+    });
+    list.querySelectorAll("[data-del-slot-inline]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        editingSlotId = null;
+        deleteSlot(btn.getAttribute("data-del-slot-inline"));
+      });
+    });
+    list.querySelectorAll("[data-close-edit]").forEach(function(btn){
+      btn.addEventListener("click", function(){ editingSlotId = null; renderSchedule(); });
     });
   }
 
