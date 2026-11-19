@@ -252,6 +252,46 @@
 
   footer{margin-top:8px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:12px;text-align:center}
 
+  /* pestañas y rutinas */
+  .tabs{display:flex;gap:4px;background:var(--paper-raised);border:1px solid var(--line);border-radius:12px;padding:4px;margin:-6px 0 22px}
+  .tab-btn{flex:1;border:0;background:none;font:inherit;font-weight:700;font-size:13.5px;color:var(--ink-soft);padding:10px 8px;border-radius:9px;cursor:pointer}
+  .tab-btn.on{background:var(--accent);color:var(--accent-ink)}
+  .tab-btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .seg-row{display:flex;flex-wrap:wrap;gap:6px}
+  .seg-btn{border:1.5px solid var(--line-strong);background:var(--paper);color:var(--ink-soft);font:inherit;font-weight:700;font-size:12.5px;padding:8px 12px;border-radius:99px;cursor:pointer}
+  .seg-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .seg-btn.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+  .rt-form{display:flex;flex-direction:column;gap:14px}
+  .rt-label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);font-weight:700;margin-bottom:7px}
+  .rt-block{margin-top:16px}
+  .rt-block-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+  .rt-block-head h3{font-family:"Fraunces",ui-serif,serif;font-weight:600;font-style:italic;font-size:17px;margin:0;color:var(--ink)}
+  .rt-block-head .spacer{margin-left:auto}
+  .rt-item{display:flex;gap:10px;align-items:flex-start;background:var(--paper-raised);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:8px;box-shadow:var(--shadow-sm)}
+  .rt-num{width:22px;flex:0 0 auto;font-size:13px;font-weight:700;color:var(--ink-faint);padding-top:2px}
+  .rt-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+  .rt-name{font-weight:700;font-size:14.5px;line-height:1.25;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .rt-dose{font:inherit;font-size:13px;font-weight:600;color:var(--accent);background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:6px 8px;width:100%}
+  .rt-cue{font-size:12.5px;color:var(--ink-soft);line-height:1.4}
+  .rt-acts{display:grid;grid-template-columns:1fr 1fr;gap:5px;flex:0 0 auto}
+  .rt-acts button{width:32px;height:32px;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink-faint);border-radius:8px;cursor:pointer;font-size:13px;padding:0}
+  .rt-acts button:hover{border-color:var(--accent);color:var(--accent)}
+  .rt-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px}
+  .btn.ghost{background:var(--paper-raised);color:var(--accent);border:1.5px solid var(--accent)}
+  .btn.ghost:hover{background:var(--accent-soft)}
+  .rt-picker{background:var(--paper);border:1px dashed var(--line-strong);border-radius:12px;padding:10px;margin:-2px 0 10px;display:flex;flex-direction:column;gap:6px;max-height:380px;overflow:auto}
+  .rt-pick-btn{text-align:left;border:1px solid var(--line);background:var(--paper-raised);color:var(--ink);border-radius:9px;padding:8px 10px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+  .rt-pick-btn small{display:block;color:var(--ink-faint);font-size:11.5px;font-weight:500;margin-top:2px}
+  .rt-pick-btn:hover{border-color:var(--accent)}
+  .rt-msg{font-size:12.5px;color:var(--pending);background:var(--pending-soft);border-radius:8px;padding:8px 11px;margin:12px 0 0}
+  .rt-textarea{width:100%;min-height:160px;font:inherit;font-size:13.5px;line-height:1.45;padding:10px;border-radius:10px;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);resize:vertical}
+  .rt-in{font:inherit;font-size:13px;padding:7px 8px;border-radius:8px;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);min-width:0}
+  .imp-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dotted var(--line)}
+  .imp-row select{flex:1 1 110px}
+  .imp-nom{flex:2 1 160px}
+  .imp-dose{flex:1 1 90px}
+  .rt-form input[type=file]{padding:8px}
+
   /* acceso privado */
   .gate{position:fixed;inset:0;z-index:999;background:var(--paper);display:flex;align-items:center;justify-content:center;padding:24px}
   .gate-card{max-width:320px;width:100%;background:var(--paper-raised);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:var(--shadow-md);display:flex;flex-direction:column;gap:10px}
@@ -301,6 +341,12 @@
     <div id="save-note"></div>
   </header>
 
+  <nav class="tabs" id="tabs" aria-label="Secciones">
+    <button type="button" class="tab-btn on" data-tab="horario">📅 Horario</button>
+    <button type="button" class="tab-btn" data-tab="rutinas">🧘 Rutinas</button>
+  </nav>
+
+  <div id="view-horario">
   <section class="section">
     <div class="hero" id="hero"></div>
     <div class="weeknav" id="weeknav"></div>
@@ -378,8 +424,151 @@
     <div class="history-row" id="history-strip"></div>
   </section>
 
+  </div>
+  <div id="view-rutinas" hidden></div>
+
   <footer>Hecho por Sebas, para que no se te pase ninguna clase 🩰</footer>
 </div>
+
+<script>
+// Biblioteca base de Rutinas — Barre (de la app de Sebas) y Pilates mat. Cada línea es un ejercicio.
+window.BASE_RUTINAS = [
+  {"id":"b_biceps_2a","tipo":"barre","cat":"brazos","nom":"Bíceps en segunda posición","eq":"mancuernas","pat":"pulsos","lado":false,"nivel":1,"cue":"Piernas en segunda, codos fijos, pulsos cortos y controlados."},
+  {"id":"b_tri_frances","tipo":"barre","cat":"brazos","nom":"Tríceps a la francesa de pie","eq":"mancuernas","pat":"tempo","lado":false,"nivel":1,"cue":"Codos junto a las orejas, extiende sin abrir.","tempo":"2-0-1"},
+  {"id":"b_circulos","tipo":"barre","cat":"brazos","nom":"Círculos micro de brazos","eq":"mancuernas","pat":"pulsos","lado":false,"nivel":1,"cue":"Brazos en cruz, círculos pequeños, hombros abajo."},
+  {"id":"b_press_lat","tipo":"barre","cat":"brazos","nom":"Press lateral con pulso","eq":"mancuernas","pat":"pulsos","lado":false,"nivel":1,"cue":"Sube a la línea del hombro y pulsa arriba."},
+  {"id":"b_remo_ballet","tipo":"barre","cat":"brazos","nom":"Remo inclinado ballet","eq":"mancuernas","pat":"reps","lado":false,"nivel":1,"cue":"Bisagra ligera, tira los codos alto, cuello largo."},
+  {"id":"b_iso_cruz","tipo":"barre","cat":"brazos","nom":"Isométrico en cruz","eq":"mancuernas","pat":"iso","lado":false,"nivel":1,"cue":"Brazos en T, sostén hasta que tiemble."},
+  {"id":"b_press_pecho","tipo":"barre","cat":"brazos","nom":"Press de pecho de pie con pulso","eq":"mancuernas","pat":"pulsos","lado":false,"nivel":1,"cue":"Codos a la altura del pecho, empuja al frente y pulsa."},
+  {"id":"b_curl_2a_pulso","tipo":"barre","cat":"brazos","nom":"Curl en segunda con pulso","eq":"mancuernas","pat":"pulsos","lado":false,"nivel":1,"cue":"Sube a 90°, pulsa arriba sin bajar del todo, codos quietos."},
+  {"id":"b_tri_dips_cubo","tipo":"barre","cat":"brazos","nom":"Fondos de tríceps en banco","eq":"banco","pat":"pulsos","lado":false,"nivel":1,"cue":"Manos en el borde del banco o step, codos atrás, pulsos cortos abajo."},
+  {"id":"b_serratus","tipo":"barre","cat":"brazos","nom":"Serratus punch con pelota","eq":"pelota","pat":"pulsos","lado":false,"nivel":1,"cue":"Brazos largos al frente con la pelota, empuja desde la escápula."},
+  {"id":"b_lat_liga","tipo":"barre","cat":"brazos","nom":"Elevación lateral con liga","eq":"liga","pat":"pulsos","lado":false,"nivel":1,"cue":"Pisa la liga, sube a la T y pulsa sin encoger el cuello."},
+  {"id":"b_plie1","tipo":"barre","cat":"piernas","nom":"Plié en primera posición","eq":"ninguno","pat":"tempo","lado":false,"nivel":1,"cue":"Talones juntos, puntas afuera, baja recta como un ascensor.","tempo":"2-1-1"},
+  {"id":"b_plie2_pulso","tipo":"barre","cat":"piernas","nom":"Plié ancho con pulso","eq":"ninguno","pat":"pulsos","lado":false,"nivel":1,"cue":"Segunda posición, rodillas sobre los tobillos, pulsa abajo."},
+  {"id":"b_releve_plie","tipo":"barre","cat":"piernas","nom":"Relevé en plié","eq":"ninguno","pat":"pulsos","lado":false,"nivel":1,"cue":"Talones altos y juntos, baja el coxis, pulsa."},
+  {"id":"b_chair","tipo":"barre","cat":"piernas","nom":"Silla en la barra (chair)","eq":"barra","pat":"iso","lado":false,"nivel":1,"cue":"Manos en la barra, muslos paralelos, sostén."},
+  {"id":"b_curtsy","tipo":"barre","cat":"piernas","nom":"Curtsy con pulso","eq":"ninguno","pat":"pulsos","lado":true,"nivel":1,"cue":"Cruza atrás en diagonal, tronco alto, pulsa abajo."},
+  {"id":"b_releve","tipo":"barre","cat":"piernas","nom":"Elevación en puntas (relevé)","eq":"barra","pat":"reps","lado":false,"nivel":1,"cue":"Apoyo ligero en la barra, sube lento al máximo, baja controlado."},
+  {"id":"b_plie_pelota","tipo":"barre","cat":"piernas","nom":"Plié con pelota entre muslos","eq":"pelota","pat":"iso","lado":false,"nivel":1,"cue":"Aprieta la pelota, sostén el plié y añade micro-pulsos."},
+  {"id":"b_plie1_releve","tipo":"barre","cat":"piernas","nom":"Plié en primera con relevé","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Baja en plié, sube estirando y elévate a media punta."},
+  {"id":"b_wide2_hold","tipo":"barre","cat":"piernas","nom":"Segunda posición sostenida","eq":"ninguno","pat":"iso","lado":false,"nivel":1,"cue":"Muslos paralelos al piso, coxis abajo, sostén hasta temblar."},
+  {"id":"b_plie_liga","tipo":"barre","cat":"piernas","nom":"Plié con liga en los muslos","eq":"liga","pat":"pulsos","lado":false,"nivel":1,"cue":"Empuja las rodillas contra la liga mientras pulsas abajo."},
+  {"id":"b_attitude","tipo":"barre","cat":"piernas","nom":"Attitude en la barra","eq":"barra","pat":"pulsos","lado":true,"nivel":1,"cue":"Apoyo en la barra, rodilla doblada al frente, pulsa arriba."},
+  {"id":"b_plie_talon","tipo":"barre","cat":"piernas","nom":"Plié con elevación de talón alterna","eq":"ninguno","pat":"reps","lado":true,"nivel":1,"cue":"Mantén el plié y sube un talón cada vez sin subir la cadera."},
+  {"id":"b_chair_pel","tipo":"barre","cat":"piernas","nom":"Silla con pelota en la pared","eq":"pelota","pat":"iso","lado":false,"nivel":1,"cue":"Pelota en la lumbar contra la pared, muslos paralelos, sostén."},
+  {"id":"b_arabesque","tipo":"barre","cat":"gluteos","nom":"Elevación en arabesque","eq":"tobilleras","pat":"pulsos","lado":true,"nivel":1,"cue":"Apoyo en la barra, pierna larga atrás, pulsa desde el glúteo."},
+  {"id":"b_bent_knee","tipo":"barre","cat":"gluteos","nom":"Rodilla doblada al techo","eq":"tobilleras","pat":"pulsos","lado":true,"nivel":1,"cue":"Cuadrupedia, talón al techo, cadera cuadrada."},
+  {"id":"b_patada_liga","tipo":"barre","cat":"gluteos","nom":"Patada trasera en la barra","eq":"liga","pat":"pulsos","lado":true,"nivel":1,"cue":"Inclina el tronco, empuja el talón atrás contra la liga."},
+  {"id":"b_puente_pel","tipo":"barre","cat":"gluteos","nom":"Puente con pelota y pulso","eq":"pelota","pat":"pulsos","lado":false,"nivel":1,"cue":"Pies sobre la pelota o rodillas apretándola, cadera alta."},
+  {"id":"b_clam","tipo":"barre","cat":"gluteos","nom":"Almeja (clam) con liga","eq":"liga","pat":"reps","lado":true,"nivel":1,"cue":"Tumbada de lado, abre la rodilla sin rotar la cadera."},
+  {"id":"b_puente_iso","tipo":"barre","cat":"gluteos","nom":"Puente iso + talón elevado","eq":"ninguno","pat":"iso","lado":false,"nivel":1,"cue":"Sube a media punta, sostén el puente alto y quieto."},
+  {"id":"b_arabesque_iso","tipo":"barre","cat":"gluteos","nom":"Arabesque sostenido","eq":"barra","pat":"iso","lado":true,"nivel":1,"cue":"Apoyo en la barra, pierna larga atrás a la altura de la cadera, sostén."},
+  {"id":"b_pretzel","tipo":"barre","cat":"gluteos","nom":"Pretzel (glúteo sentada)","eq":"ninguno","pat":"pulsos","lado":true,"nivel":1,"cue":"Sentada con la pierna cruzada atrás, elévala pulsando desde el glúteo."},
+  {"id":"b_bridge_releve","tipo":"barre","cat":"gluteos","nom":"Puente en relevé con pulso","eq":"ninguno","pat":"pulsos","lado":false,"nivel":1,"cue":"Puente alto sobre medias puntas, pulsa la cadera hacia el techo."},
+  {"id":"b_kick_diag_liga","tipo":"barre","cat":"gluteos","nom":"Patada diagonal con liga","eq":"liga","pat":"pulsos","lado":true,"nivel":1,"cue":"Empuja el talón en diagonal atrás y afuera contra la liga."},
+  {"id":"b_bent_circle","tipo":"barre","cat":"gluteos","nom":"Círculos de rodilla doblada","eq":"tobilleras","pat":"pulsos","lado":true,"nivel":1,"cue":"Cuadrupedia, rodilla a 90°, dibuja círculos con el talón arriba."},
+  {"id":"b_gluteo_pel_rod","tipo":"barre","cat":"gluteos","nom":"Puente con pelota entre rodillas","eq":"pelota","pat":"pulsos","lado":false,"nivel":1,"cue":"Aprieta la pelota entre las rodillas mientras pulsas la cadera arriba."},
+  {"id":"b_ccurve","tipo":"barre","cat":"core","nom":"C-curve con pulso","eq":"ninguno","pat":"pulsos","lado":false,"nivel":1,"cue":"Enrolla la columna en C, rueda atrás una vértebra y pulsa."},
+  {"id":"b_round_pel","tipo":"barre","cat":"core","nom":"Round-back con pelota","eq":"pelota","pat":"pulsos","lado":false,"nivel":1,"cue":"Pelota entre las manos, empuja al frente manteniendo la C."},
+  {"id":"b_obl_ccurve","tipo":"barre","cat":"core","nom":"Oblicuos en C-curve","eq":"ninguno","pat":"pulsos","lado":true,"nivel":1,"cue":"Gira el tronco hacia un lado sin perder la C, pulsa."},
+  {"id":"b_plancha_dip","tipo":"barre","cat":"core","nom":"Plancha con caída de cadera","eq":"ninguno","pat":"pulsos","lado":true,"nivel":1,"cue":"Antebrazos, gira la cadera y toca el mat, alterna."},
+  {"id":"b_leg_ballet","tipo":"barre","cat":"core","nom":"Elevación de piernas ballet","eq":"ninguno","pat":"tempo","lado":false,"nivel":1,"cue":"Piernas largas en V, baja lento sin despegar la lumbar.","tempo":"2-0-2"},
+  {"id":"b_hollow","tipo":"barre","cat":"core","nom":"Hollow con brazos largos","eq":"ninguno","pat":"iso","lado":false,"nivel":1,"cue":"Brazos por encima de la cabeza, lumbar clavada, sostén."},
+  {"id":"b_ccurve_twist","tipo":"barre","cat":"core","nom":"C-curve con giro y pulso","eq":"ninguno","pat":"pulsos","lado":true,"nivel":1,"cue":"Mantén la C, gira el tronco a un lado y pulsa atrás."},
+  {"id":"b_low_ccurve","tipo":"barre","cat":"core","nom":"C-curve bajo en tabletop","eq":"ninguno","pat":"pulsos","lado":false,"nivel":1,"cue":"Rodillas a 90° flotando, rueda más atrás sin soltar la C."},
+  {"id":"b_teaser","tipo":"barre","cat":"core","nom":"Teaser ballet sostenido","eq":"ninguno","pat":"iso","lado":false,"nivel":1,"cue":"V con las piernas largas y brazos al frente, sostén y respira."},
+  {"id":"b_bicycle_bal","tipo":"barre","cat":"core","nom":"Bicicleta lenta en C-curve","eq":"ninguno","pat":"pulsos","lado":true,"nivel":1,"cue":"Codo a rodilla opuesta despacio, la otra pierna larga."},
+  {"id":"b_plank_leg","tipo":"barre","cat":"core","nom":"Plancha con elevación de pierna","eq":"tobilleras","pat":"pulsos","lado":true,"nivel":1,"cue":"Antebrazos, sube una pierna recta y pulsa sin mover la cadera."},
+  {"id":"b_crunch_pel_ext","tipo":"barre","cat":"core","nom":"Crunch con pelota arriba","eq":"pelota","pat":"reps","lado":false,"nivel":1,"cue":"Pelota estirada por encima de la cabeza, sube en bloque."},
+  {"id":"b_w_cadera","tipo":"barre","cat":"calentamiento","nom":"Movilidad de cadera 90/90","eq":"ninguno","pat":"reps","lado":true,"nivel":1,"cue":"Rota de un lado al otro sentada, pecho alto."},
+  {"id":"b_w_brazos","tipo":"barre","cat":"calentamiento","nom":"Círculos de brazos","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Círculos grandes, adelante y atrás."},
+  {"id":"b_w_squat_air","tipo":"barre","cat":"calentamiento","nom":"Sentadilla al aire","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Rango completo y suave, despierta las piernas."},
+  {"id":"b_bw_rolldown","tipo":"barre","cat":"calentamiento","nom":"Roll-down de columna","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Baja vértebra a vértebra y sube enrollando lento."},
+  {"id":"b_bw_plie_suave","tipo":"barre","cat":"calentamiento","nom":"Pliés suaves en primera","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Rango cómodo, calienta rodillas y tobillos."},
+  {"id":"b_bw_port_bras","tipo":"barre","cat":"calentamiento","nom":"Port de bras","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Brazos que dibujan círculos amplios con la respiración."},
+  {"id":"b_bw_releve_prep","tipo":"barre","cat":"calentamiento","nom":"Relevés de tobillo","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Sube y baja los talones despacio para despertar la pantorrilla."},
+  {"id":"b_bw_cat_flow","tipo":"barre","cat":"calentamiento","nom":"Gato-camello con respiración","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Moviliza toda la columna al ritmo de inhalar y exhalar."},
+  {"id":"b_w_leg_swings","tipo":"barre","cat":"calentamiento","nom":"Balanceos de pierna","eq":"ninguno","pat":"reps","lado":true,"nivel":1,"cue":"Adelante-atrás y lado a lado, apóyate en la pared."},
+  {"id":"b_w_march_core","tipo":"barre","cat":"calentamiento","nom":"Marcha con activación de core","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Rodillas altas controladas, ombligo adentro, no arquees."},
+  {"id":"b_z_pecho","tipo":"barre","cat":"estiramiento","nom":"Estiramiento de pecho en pared","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Antebrazo en la pared, gira el tronco lejos."},
+  {"id":"b_z_cuadri","tipo":"barre","cat":"estiramiento","nom":"Cuádriceps de pie","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Rodillas juntas, empuja la cadera al frente."},
+  {"id":"b_z_isquios","tipo":"barre","cat":"estiramiento","nom":"Estiramiento de isquios","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Pierna extendida, bisagra desde la cadera."},
+  {"id":"b_z_gato","tipo":"barre","cat":"estiramiento","nom":"Gato–camello","eq":"ninguno","pat":"reps","lado":false,"nivel":1,"cue":"Moviliza la columna al ritmo de la respiración."},
+  {"id":"b_z_nino","tipo":"barre","cat":"estiramiento","nom":"Postura del niño","eq":"ninguno","pat":"iso","lado":false,"nivel":1,"cue":"Rodillas abiertas, brazos largos, respira al fondo."},
+  {"id":"b_bz_figure4","tipo":"barre","cat":"estiramiento","nom":"Figura 4 sentada","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Tobillo sobre la rodilla, lleva el pecho al frente."},
+  {"id":"b_bz_split","tipo":"barre","cat":"estiramiento","nom":"Apertura hacia split","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Desliza con control, respira en el estiramiento, sin rebotar."},
+  {"id":"b_bz_fold","tipo":"barre","cat":"estiramiento","nom":"Flexión de pie en la barra","eq":"barra","pat":"iso","lado":false,"nivel":1,"cue":"Manos en la barra, alarga la columna hacia delante."},
+  {"id":"b_bz_mariposa","tipo":"barre","cat":"estiramiento","nom":"Mariposa con enrollado","eq":"ninguno","pat":"iso","lado":false,"nivel":1,"cue":"Plantas juntas, redondea la espalda hacia los pies."},
+  {"id":"b_bz_pigeon","tipo":"barre","cat":"estiramiento","nom":"Paloma en el mat","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Espinilla al frente, cadera cuadrada, baja el pecho."},
+  {"id":"b_bz_quad_lado","tipo":"barre","cat":"estiramiento","nom":"Cuádriceps tumbada de lado","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Talón al glúteo, rodillas juntas, empuja la cadera al frente."},
+  {"id":"b_z_paloma","tipo":"barre","cat":"estiramiento","nom":"Postura de la paloma","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Espinilla al frente, baja el pecho, respira en la cadera."},
+  {"id":"b_z_torsion","tipo":"barre","cat":"estiramiento","nom":"Torsión espinal tumbada","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Rodillas a un lado, mirada al lado opuesto, hombros en el mat."},
+  {"id":"b_z_cobra","tipo":"barre","cat":"estiramiento","nom":"Cobra suave","eq":"ninguno","pat":"iso","lado":false,"nivel":1,"cue":"Empuja el pecho al frente, hombros lejos de las orejas."},
+  {"id":"b_z_cuello","tipo":"barre","cat":"estiramiento","nom":"Estiramiento de cuello y trapecio","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"cue":"Oreja al hombro, mano suave sobre la cabeza, sin tirar."},
+  {"id":"pm_resp_costal","tipo":"pilates","cat":"calentamiento","nom":"Respiración costal lateral","eq":"ninguno","pat":"resp","lado":false,"nivel":1,"ord":1,"cue":"Manos en las costillas: inhala abriendo hacia los lados, exhala cerrando y activando el centro.","d":[4,5,6]},
+  {"id":"pm_imprint","tipo":"pilates","cat":"calentamiento","nom":"Imprint pélvico","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":2,"cue":"Con la exhalación aplana la lumbar contra el mat, sin apretar los glúteos.","d":[6,8,8]},
+  {"id":"pm_pelvic_curl_prep","tipo":"pilates","cat":"calentamiento","nom":"Báscula pélvica suave","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":3,"cue":"Despega la pelvis poco a poco y vuelve a bajar con el mismo control.","d":[5,6,6]},
+  {"id":"pm_knee_folds","tipo":"pilates","cat":"calentamiento","nom":"Rodillas en mesa alternas (knee folds)","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":4,"cue":"Sube una rodilla a la vez sin que la pelvis se mueva.","d":[6,8,10]},
+  {"id":"pm_wipers","tipo":"pilates","cat":"calentamiento","nom":"Limpiaparabrisas de rodillas","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":5,"cue":"Rodillas juntas hacia un lado y otro, hombros pegados al mat.","d":[5,6,8]},
+  {"id":"pm_arm_arcs","tipo":"pilates","cat":"calentamiento","nom":"Arcos de brazos tumbada","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":6,"cue":"Brazos largos, abre y cierra arcos sin que se levante la costilla.","d":[4,5,6]},
+  {"id":"pm_cat_cow","tipo":"pilates","cat":"calentamiento","nom":"Gato–camello","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":7,"cue":"En cuadrupedia, redondea y extiende la columna con la respiración.","d":[5,6,8]},
+  {"id":"pm_rolldown_stand","tipo":"pilates","cat":"calentamiento","nom":"Roll-down de pie","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":8,"cue":"Baja vértebra a vértebra con rodillas suaves y sube enrollando.","d":[4,5,6]},
+  {"id":"pm_dead_bug","tipo":"pilates","cat":"core","nom":"Bicho muerto (dead bug)","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":12,"cue":"Pierna y brazo opuestos, lumbar estable contra el mat.","d":[6,8,10]},
+  {"id":"pm_chest_lift","tipo":"pilates","cat":"core","nom":"Elevación de pecho (chest lift)","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":14,"cue":"Barbilla suave al pecho, sube con la exhalación y baja lento.","d":[6,8,10]},
+  {"id":"pm_ball_chest","tipo":"pilates","cat":"core","nom":"Elevación de pecho con pelota","eq":"pelota","pat":"rep","lado":false,"nivel":1,"ord":15,"cue":"Pelota entre las manos, sube en bloque sin tirar del cuello.","d":[6,8,10]},
+  {"id":"pm_ring_chest","tipo":"pilates","cat":"core","nom":"Elevación de pecho con aro","eq":"aro","pat":"rep","lado":false,"nivel":1,"ord":16,"cue":"Aro entre las manos, empuja suave mientras subes el pecho.","d":[6,8,10]},
+  {"id":"pm_hundred_tab","tipo":"pilates","cat":"core","nom":"The Hundred con rodillas en mesa","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":20,"cue":"Brazos bombeando arriba y abajo, cuello largo, respira 5 y 5.","fam":"hundred","dz":["5 ciclos de respiración (50 pulsos)","8 ciclos de respiración (80 pulsos)","10 ciclos de respiración (100 pulsos)"]},
+  {"id":"pm_hundred","tipo":"pilates","cat":"core","nom":"The Hundred","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":20,"cue":"Piernas arriba o a 45°, pulsa los brazos con respiración 5 y 5.","fam":"hundred","dz":["8 ciclos de respiración (80 pulsos)","10 ciclos de respiración (100 pulsos)","10 ciclos de respiración (100 pulsos)"]},
+  {"id":"pm_rollback","tipo":"pilates","cat":"core","nom":"Roll-back sentada","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":30,"cue":"Sentada con rodillas flexionadas, rueda hacia atrás hasta la mitad y vuelve.","d":[4,5,6],"fam":"rollup"},
+  {"id":"pm_rollup","tipo":"pilates","cat":"core","nom":"Roll Up","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":30,"cue":"Brazos arriba, enrolla vértebra a vértebra hasta los pies, sin impulso.","d":[3,5,6],"fam":"rollup"},
+  {"id":"pm_leg_circles","tipo":"pilates","cat":"core","nom":"Círculos de pierna (single leg circle)","eq":"ninguno","pat":"rep","lado":true,"nivel":2,"ord":40,"cue":"Pelvis quieta, dibuja círculos pequeños y precisos con la pierna.","d":[4,5,6]},
+  {"id":"pm_rolling_ball","tipo":"pilates","cat":"core","nom":"Rolling like a Ball","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":50,"cue":"Equilibrio en la C-curve, rueda hasta los omóplatos sin tocar la cabeza.","d":[5,6,8]},
+  {"id":"pm_single_leg_stretch","tipo":"pilates","cat":"core","nom":"Single Leg Stretch","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":60,"cue":"Alterna rodillas, hombros arriba, pelvis estable.","d":[6,8,10]},
+  {"id":"pm_double_leg_stretch","tipo":"pilates","cat":"core","nom":"Double Leg Stretch","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":62,"cue":"Extiende brazos y piernas a la vez y vuelve a recoger con control.","d":[5,6,8]},
+  {"id":"pm_scissors","tipo":"pilates","cat":"core","nom":"Tijeras (single straight leg)","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":64,"cue":"Piernas largas alternando, cabeza y hombros arriba.","d":[6,8,10]},
+  {"id":"pm_criss_cross","tipo":"pilates","cat":"core","nom":"Criss-Cross","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":66,"cue":"Gira desde las costillas, codo hacia la rodilla contraria.","d":[6,8,10]},
+  {"id":"pm_leg_lowers","tipo":"pilates","cat":"core","nom":"Bajadas de piernas","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":68,"cue":"Baja las piernas solo hasta donde la lumbar siga apoyada.","d":[4,5,6]},
+  {"id":"pm_corkscrew","tipo":"pilates","cat":"core","nom":"Sacacorchos (corkscrew)","eq":"ninguno","pat":"rep","lado":false,"nivel":3,"ord":70,"cue":"Piernas juntas dibujan círculos pequeños; la pelvis casi no se mueve.","d":[3,4,5]},
+  {"id":"pm_teaser_prep","tipo":"pilates","cat":"core","nom":"Teaser preparatorio","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":80,"cue":"Una pierna extendida, sube en V con la columna larga.","d":[3,4,5],"fam":"teaser"},
+  {"id":"pm_teaser","tipo":"pilates","cat":"core","nom":"Teaser","eq":"ninguno","pat":"rep","lado":false,"nivel":3,"ord":80,"cue":"Sube en V con piernas y brazos largos, baja vértebra a vértebra.","d":[3,4,5],"fam":"teaser"},
+  {"id":"pm_plank","tipo":"pilates","cat":"core","nom":"Plancha (front support)","eq":"ninguno","pat":"iso","lado":false,"nivel":2,"ord":90,"cue":"Cuerpo en línea, ombligo adentro, hombros lejos de las orejas.","d":[20,30,45]},
+  {"id":"pm_pelvic_curl","tipo":"pilates","cat":"columna","nom":"Puente vértebra a vértebra (pelvic curl)","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":105,"cue":"Sube la pelvis desenrollando la columna y baja vértebra a vértebra.","d":[5,6,8]},
+  {"id":"pm_spine_stretch","tipo":"pilates","cat":"columna","nom":"Spine Stretch Forward","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":100,"cue":"Sentada con piernas abiertas, redondea hacia delante con una C larga.","d":[4,5,6]},
+  {"id":"pm_spine_twist","tipo":"pilates","cat":"columna","nom":"Giro de columna (spine twist)","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":110,"cue":"Columna alta, gira desde las costillas sin mover la pelvis.","d":[4,5,6]},
+  {"id":"pm_saw","tipo":"pilates","cat":"columna","nom":"La sierra (saw)","eq":"ninguno","pat":"rep","lado":true,"nivel":2,"ord":120,"cue":"Gira y alcanza el pie contrario con el meñique, empuja el talón.","d":[3,4,5]},
+  {"id":"pm_seal","tipo":"pilates","cat":"columna","nom":"La foca (seal)","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":130,"cue":"En equilibrio, balancea hacia atrás y vuelve sin perder la C.","d":[5,6,8]},
+  {"id":"pm_open_leg_rocker","tipo":"pilates","cat":"columna","nom":"Open Leg Rocker","eq":"ninguno","pat":"rep","lado":false,"nivel":3,"ord":140,"cue":"Piernas abiertas en V, rueda atrás y vuelve con el abdomen.","d":[4,5,6]},
+  {"id":"pm_rollover","tipo":"pilates","cat":"columna","nom":"Roll Over","eq":"ninguno","pat":"rep","lado":false,"nivel":3,"ord":150,"cue":"Controla con el abdomen, no con el cuello; baja lento.","d":[3,4,5]},
+  {"id":"pm_mermaid","tipo":"pilates","cat":"laterales","nom":"Sirena (flexión lateral sentada)","eq":"ninguno","pat":"rep","lado":true,"nivel":1,"ord":200,"cue":"Sentada, alarga la columna y se inclina hacia un lado sin girar.","d":[3,4,5]},
+  {"id":"pm_side_lift","tipo":"pilates","cat":"laterales","nom":"Elevación de pierna lateral","eq":"ninguno","pat":"rep","lado":true,"nivel":1,"ord":215,"cue":"Tumbada de lado, pelvis estable, sube la pierna a la altura de la cadera.","d":[8,10,12]},
+  {"id":"pm_side_kick","tipo":"pilates","cat":"laterales","nom":"Patada lateral adelante–atrás (side kick)","eq":"ninguno","pat":"rep","lado":true,"nivel":2,"ord":210,"cue":"Tronco quieto; la pierna va adelante y atrás sin mover la pelvis.","d":[8,10,12]},
+  {"id":"pm_inner_thigh","tipo":"pilates","cat":"laterales","nom":"Aductores tumbada de lado","eq":"ninguno","pat":"rep","lado":true,"nivel":1,"ord":220,"cue":"Pierna de arriba flexionada al frente; sube la de abajo, larga.","d":[8,10,12]},
+  {"id":"pm_side_circles","tipo":"pilates","cat":"laterales","nom":"Círculos de pierna lateral","eq":"ninguno","pat":"rep","lado":true,"nivel":2,"ord":225,"cue":"Círculos pequeños con la pierna en el aire, cadera quieta.","d":[6,8,10]},
+  {"id":"pm_clam","tipo":"pilates","cat":"laterales","nom":"Concha (clam shell)","eq":"ninguno","pat":"rep","lado":true,"nivel":1,"ord":230,"cue":"Abre la rodilla de arriba sin rotar la pelvis.","d":[10,12,15]},
+  {"id":"pm_side_plank","tipo":"pilates","cat":"laterales","nom":"Plancha lateral","eq":"ninguno","pat":"iso","lado":true,"nivel":2,"ord":240,"cue":"Cuerpo en línea, empuja el suelo y alarga la coronilla.","d":[15,25,40]},
+  {"id":"pm_side_bicycle","tipo":"pilates","cat":"laterales","nom":"Bicicleta lateral","eq":"ninguno","pat":"rep","lado":true,"nivel":3,"ord":245,"cue":"Tumbada de lado, pedalea con control, pelvis quieta.","d":[5,6,8]},
+  {"id":"pm_dart","tipo":"pilates","cat":"posterior","nom":"Dart (elevación de pecho boca abajo)","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":300,"cue":"Alarga el cuello y sube el pecho con la espalda alta.","d":[5,6,8]},
+  {"id":"pm_swan_prep","tipo":"pilates","cat":"posterior","nom":"Swan preparatorio","eq":"ninguno","pat":"rep","lado":false,"nivel":1,"ord":305,"cue":"Manos bajo los hombros, extiende la columna con control.","d":[4,5,6],"fam":"swan"},
+  {"id":"pm_swan","tipo":"pilates","cat":"posterior","nom":"Swan","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":305,"cue":"Extiende la columna con los brazos largos, cuello neutro.","d":[3,4,5],"fam":"swan"},
+  {"id":"pm_single_leg_kick","tipo":"pilates","cat":"posterior","nom":"Single Leg Kick","eq":"ninguno","pat":"rep","lado":false,"nivel":2,"ord":310,"cue":"Boca abajo, pecho alto, patea alternando con el talón al glúteo.","d":[6,8,10]},
+  {"id":"pm_double_leg_kick","tipo":"pilates","cat":"posterior","nom":"Double Leg Kick","eq":"ninguno","pat":"rep","lado":false,"nivel":3,"ord":315,"cue":"Manos a la espalda, patea y extiende el pecho hacia delante.","d":[3,4,5]},
+  {"id":"pm_swimming","tipo":"pilates","cat":"posterior","nom":"Nado (swimming)","eq":"ninguno","pat":"seg","lado":false,"nivel":2,"ord":320,"cue":"Brazos y piernas alternos, abdomen firme, cuello largo.","d":[15,20,30]},
+  {"id":"pm_bird_dog","tipo":"pilates","cat":"posterior","nom":"Perro de caza (bird-dog)","eq":"ninguno","pat":"rep","lado":true,"nivel":1,"ord":322,"cue":"Cuadrupedia, brazo y pierna opuestos largos, pelvis nivelada.","d":[5,6,8]},
+  {"id":"pm_bridge_leg","tipo":"pilates","cat":"posterior","nom":"Puente con elevación de pierna","eq":"ninguno","pat":"rep","lado":true,"nivel":2,"ord":325,"cue":"Puente alto, sube una pierna sin dejar caer la pelvis.","d":[4,5,6]},
+  {"id":"pm_ball_bridge","tipo":"pilates","cat":"posterior","nom":"Puente con pelota entre las rodillas","eq":"pelota","pat":"rep","lado":false,"nivel":1,"ord":327,"cue":"Aprieta la pelota suave y sube la pelvis vértebra a vértebra.","d":[6,8,10]},
+  {"id":"pm_ring_bridge","tipo":"pilates","cat":"posterior","nom":"Puente con aro entre las rodillas","eq":"aro","pat":"rep","lado":false,"nivel":1,"ord":328,"cue":"Presiona el aro con los muslos y sube la pelvis controlando.","d":[8,10,12]},
+  {"id":"pm_leg_pull_front","tipo":"pilates","cat":"posterior","nom":"Leg Pull Front","eq":"ninguno","pat":"rep","lado":true,"nivel":3,"ord":330,"cue":"Plancha larga, sube una pierna y vuelve sin mover la pelvis.","d":[3,4,5]},
+  {"id":"pm_leg_pull_back","tipo":"pilates","cat":"posterior","nom":"Leg Pull Back","eq":"ninguno","pat":"rep","lado":true,"nivel":3,"ord":335,"cue":"Plancha inversa, pecho abierto, sube la pierna larga.","d":[3,4,5]},
+  {"id":"pm_childs","tipo":"pilates","cat":"estiramiento","nom":"Postura del niño","eq":"ninguno","pat":"resp","lado":false,"nivel":1,"ord":400,"cue":"Rodillas abiertas, brazos largos y respira hacia la espalda.","d":[4,5,6]},
+  {"id":"pm_hug","tipo":"pilates","cat":"estiramiento","nom":"Abrazo de rodillas","eq":"ninguno","pat":"resp","lado":false,"nivel":1,"ord":405,"cue":"Rodillas al pecho, balancea suave de lado a lado.","d":[3,4,5]},
+  {"id":"pm_twist_lying","tipo":"pilates","cat":"estiramiento","nom":"Torsión espinal tumbada","eq":"ninguno","pat":"resp","lado":true,"nivel":1,"ord":410,"cue":"Rodillas a un lado, mirada al lado opuesto, hombros en el mat.","d":[3,4,5]},
+  {"id":"pm_hamstring","tipo":"pilates","cat":"estiramiento","nom":"Isquios tumbada (con manos o liga)","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"ord":415,"cue":"Pierna al techo, sostén detrás del muslo, sin forzar.","d":[20,30,45]},
+  {"id":"pm_sphinx","tipo":"pilates","cat":"estiramiento","nom":"Esfinge suave","eq":"ninguno","pat":"iso","lado":false,"nivel":1,"ord":420,"cue":"Antebrazos en el mat, alarga el pecho hacia delante.","d":[20,30,40]},
+  {"id":"pm_figure4","tipo":"pilates","cat":"estiramiento","nom":"Figura 4 tumbada","eq":"ninguno","pat":"iso","lado":true,"nivel":1,"ord":425,"cue":"Tobillo sobre la rodilla, tira suave del muslo hacia el pecho.","d":[20,30,45]},
+  {"id":"pm_rolldown_final","tipo":"pilates","cat":"estiramiento","nom":"Roll-down de pie y respiración final","eq":"ninguno","pat":"resp","lado":false,"nivel":1,"ord":430,"cue":"Baja enrollando, sube lento y cierra con una respiración profunda.","d":[3,4,5]}
+];
+</script>
 
 <script>
 (function(){
@@ -1415,10 +1604,26 @@
     });
   }
 
+  // ---------- pestañas y puente con Rutinas ----------
+  window.__PL = { state: function(){ return STATE; }, save: function(){ publishState(); }, esc: escapeHtml };
+  var TAB_KEY = "pase-de-lia-tab";
+  function showTab(t){
+    if(t !== "rutinas") t = "horario";
+    document.getElementById("view-horario").hidden = t !== "horario";
+    document.getElementById("view-rutinas").hidden = t !== "rutinas";
+    document.querySelectorAll("#tabs .tab-btn").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-tab") === t); });
+    try{ localStorage.setItem(TAB_KEY, t); }catch(e){}
+  }
+  document.querySelectorAll("#tabs .tab-btn").forEach(function(b){
+    b.addEventListener("click", function(){ showTab(b.getAttribute("data-tab")); window.scrollTo(0, 0); });
+  });
+  var savedTab = "horario"; try{ savedTab = localStorage.getItem(TAB_KEY) || "horario"; }catch(e){}
+  showTab(savedTab);
+
   // ---------- actualización automática ----------
   // Al abrir la app (o volver a ella desde otra) revisa si hay una versión nueva publicada y se
   // recarga sola. Tus datos viven en el teléfono, así que recargar no pierde nada.
-  var APP_VERSION = "2026-11-19.2";
+  var APP_VERSION = "2026-11-19.3";
   var lastUpdateCheck = 0;
   function checkForUpdate(){
     var now = Date.now();
@@ -1446,6 +1651,595 @@
   initExtraForm();
   initQuickForm();
   renderAll();
+})();
+</script>
+
+<script>
+/* ============================================================
+   RUTINAS — arma rutinas de Barre y Pilates mat con la biblioteca base
+   y con lo que Lía sube (sus propias rutinas). Todo en su teléfono.
+   Estado: STATE.rutinas = {biblio, subidas, guardadas, actual, hist, prefs}
+   ============================================================ */
+(function(){
+  "use strict";
+  var PL = window.__PL, BASE = window.BASE_RUTINAS;
+  var root = document.getElementById("view-rutinas");
+  if(!PL || !BASE || !root) return;
+  var esc = PL.esc;
+
+  var TIPOS = {barre:"Barre", pilates:"Pilates mat"};
+  var CATS = {
+    barre:   [["calentamiento","Calentamiento"],["brazos","Brazos"],["piernas","Piernas"],["gluteos","Glúteos"],["core","Core"],["estiramiento","Estiramiento"]],
+    pilates: [["calentamiento","Calentamiento"],["core","Abdomen y centro"],["columna","Columna"],["laterales","Laterales"],["posterior","Espalda y posterior"],["estiramiento","Estiramiento"]]
+  };
+  // cuántos ejercicios por bloque en una clase de 45 min
+  var PLANTILLA = {
+    barre:   [["calentamiento",2],["brazos",3],["piernas",4],["gluteos",3],["core",3],["estiramiento",2]],
+    pilates: [["calentamiento",2],["core",4],["columna",3],["laterales",3],["posterior",3],["estiramiento",2]]
+  };
+  var EQUIPOS = {barre:["barra","mancuernas","pelota","liga","tobilleras","banco"], pilates:["aro","pelota","liga"]};
+  var EQ_LABEL = {barra:"Barra", mancuernas:"Mancuernas ligeras", pelota:"Pelota pequeña", liga:"Liga", tobilleras:"Tobilleras", banco:"Banco o step", aro:"Aro mágico"};
+  var NIVELES = [["1","Principiante"],["2","Intermedio"],["3","Avanzado"]];
+  var USOS = [["mias","Solo mis ejercicios"],["mezcla","Mezcla con nuevos"],["nuevo","Solo nuevos"]];
+  var MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+  var FALLBACK = {barre:{columna:"core", laterales:"gluteos", posterior:"gluteos"}, pilates:{brazos:"core", piernas:"laterales", gluteos:"posterior"}};
+
+  // ---------- estado ----------
+  var ui = {msg:"", picker:null, imp:null, impText:"", impTipo:"barre", impMsg:""};
+
+  function R(){
+    var s = PL.state();
+    if(!s.rutinas || typeof s.rutinas !== "object") s.rutinas = {};
+    var r = s.rutinas;
+    ["biblio","subidas","guardadas","hist"].forEach(function(k){ if(!Array.isArray(r[k])) r[k] = []; });
+    if(!r.prefs || typeof r.prefs !== "object") r.prefs = {};
+    var p = r.prefs;
+    if(p.tipo !== "barre" && p.tipo !== "pilates") p.tipo = "barre";
+    if([30,45,50,60].indexOf(p.dur) < 0) p.dur = 45;
+    p.nivel = (["1","2","3"].indexOf(String(p.nivel)) < 0) ? "2" : String(p.nivel);
+    if(["mias","mezcla","nuevo"].indexOf(p.uso) < 0) p.uso = "mezcla";
+    if(!p.eq || typeof p.eq !== "object") p.eq = {};
+    ["barre","pilates"].forEach(function(t){ if(!Array.isArray(p.eq[t])) p.eq[t] = EQUIPOS[t].slice(); });
+    if(typeof p.estructura !== "string") p.estructura = "std";
+    return r;
+  }
+  function save(){ PL.save(); }
+
+  // ---------- utilidades ----------
+  function uid(){ return "r" + Math.random().toString(36).slice(2, 9); }
+  function norm(s){ return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim(); }
+  function shuffle(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function catLabel(tipo, cat){
+    var c = (CATS[tipo] || []).filter(function(x){ return x[0] === cat; })[0];
+    return c ? c[1] : (cat === "otro" ? "Otros" : cat);
+  }
+  function mapCat(tipo, c){
+    if(!c) return null;
+    if((CATS[tipo] || []).some(function(x){ return x[0] === c; })) return c;
+    return (FALLBACK[tipo] || {})[c] || null;
+  }
+  function shortDate(){ var d = new Date(); return d.getDate() + " " + MESES[d.getMonth()]; }
+  function nivelLabel(n){ return (NIVELES.filter(function(x){ return x[0] === String(n); })[0] || [0, "Intermedio"])[1]; }
+
+  // ---------- dosis ----------
+  function doseFor(ex, nivel){
+    if(typeof ex.dosis === "string" && ex.dosis) return ex.dosis;   // texto propio de Lía
+    var i = Math.max(1, Math.min(3, +nivel || 2)) - 1, lado = ex.lado ? " por lado" : "";
+    if(ex.dz) return ex.dz[i];
+    var d = ex.d ? ex.d[i] : null;
+    switch(ex.pat){
+      case "pulsos": return (d || [16, 32, 32][i]) + " cuentas de pulsos" + lado;
+      case "tempo":  return (d || [8, 10, 12][i]) + " reps" + (ex.tempo ? " · tempo " + ex.tempo : "") + lado;
+      case "iso":    return "sostén " + (d || [30, 45, 60][i]) + " seg" + lado;
+      case "resp":   return (d || [3, 5, 8][i]) + " respiraciones" + lado;
+      case "seg":    return (d || [20, 30, 45][i]) + " seg" + lado;
+      default:       return (d || [10, 12, 15][i]) + " repeticiones" + lado;
+    }
+  }
+
+  // ---------- biblioteca ----------
+  function eqOk(ex, sel){ var q = ex.eq || "ninguno"; return q === "ninguno" || sel.indexOf(q) >= 0; }
+  function exById(id){
+    var f = BASE.filter(function(e){ return e.id === id; })[0];
+    return f || R().biblio.filter(function(e){ return e.id === id; })[0] || null;
+  }
+  function freshSort(list){
+    var recent = {}; R().hist.slice(-60).forEach(function(id){ recent[id] = 1; });
+    return shuffle(list).sort(function(a, b){ return (recent[a.id] ? 1 : 0) - (recent[b.id] ? 1 : 0); });
+  }
+
+  // Elige n ejercicios para un bloque de la categoría `cat`, según "mis ejercicios / mezcla / nuevos".
+  function pickForBlock(tipo, cat, n, cfg, taken, fam){
+    var biblio = R().biblio.filter(function(e){ return e.tipo === tipo && !taken[e.id]; });
+    var mine = freshSort(cat === "otro" ? biblio : biblio.filter(function(e){ return e.cat === cat; }));
+    var otro = freshSort(biblio.filter(function(e){ return e.cat === "otro"; }));
+    var base = freshSort(cat === "otro" ? [] : BASE.filter(function(e){
+      return e.tipo === tipo && e.cat === cat && e.nivel <= (+cfg.nivel) && eqOk(e, cfg.eq) && !taken[e.id];
+    }));
+    var out = [];
+    function take(list, k){
+      for(var i = 0; i < list.length && k > 0; i++){
+        var e = list[i];
+        if(taken[e.id] || (e.fam && fam[e.fam])) continue;
+        out.push(e); taken[e.id] = 1; if(e.fam) fam[e.fam] = 1; k--;
+      }
+      return k;
+    }
+    var left = n;
+    if(cfg.uso === "mias"){ left = take(mine, left); left = take(otro, left); left = take(base, left); }
+    else if(cfg.uso === "nuevo"){ left = take(base, left); left = take(mine, left); }
+    else {
+      var want = Math.min(mine.length, Math.round(n * 0.6));
+      var rest = take(mine, want);
+      left = n - (want - rest);
+      left = take(base, left); left = take(mine, left); left = take(otro, left);
+    }
+    return out;
+  }
+
+  // Orden dentro del bloque: los de la biblioteca base siguen su secuencia clásica; los de Lía se intercalan al azar.
+  function orderItems(tipo, items){
+    var withOrd = items.filter(function(e){ return e.ord != null; }).sort(function(a, b){ return a.ord - b.ord; });
+    var free = shuffle(items.filter(function(e){ return e.ord == null; }));
+    free.forEach(function(x){ withOrd.splice(Math.floor(Math.random() * (withOrd.length + 1)), 0, x); });
+    if(tipo === "barre"){   // los sostenidos ("hasta que tiemble") al final del bloque
+      withOrd = withOrd.filter(function(e){ return e.pat !== "iso"; }).concat(withOrd.filter(function(e){ return e.pat === "iso"; }));
+    }
+    return withOrd;
+  }
+  function mkItem(e, nivel){ return {uid: uid(), ref: e.id, nom: e.nom, dosis: doseFor(e, nivel), cue: e.cue || "", mine: !!e.mine}; }
+
+  function structureFor(cfg){
+    var f = cfg.dur / 45, tipo = cfg.tipo;
+    if(cfg.estructura && cfg.estructura.indexOf("sub:") === 0){
+      var sub = R().subidas.filter(function(s){ return s.id === cfg.estructura.slice(4) && s.tipo === tipo; })[0];
+      if(sub) return sub.blocks.map(function(b){ return {cat: b.cat, nom: b.nom || catLabel(tipo, b.cat), n: Math.max(1, b.items.length)}; });
+    }
+    return PLANTILLA[tipo].map(function(x){ return {cat: x[0], nom: catLabel(tipo, x[0]), n: Math.max(1, Math.round(x[1] * f))}; });
+  }
+  function cfgFromPrefs(){
+    var p = R().prefs;
+    return {tipo: p.tipo, dur: p.dur, nivel: p.nivel, uso: p.uso, eq: p.eq[p.tipo].slice(), estructura: p.estructura};
+  }
+  function generate(cfg){
+    var taken = {}, fam = {};
+    var blocks = structureFor(cfg).map(function(b){
+      var picks = orderItems(cfg.tipo, pickForBlock(cfg.tipo, b.cat, b.n, cfg, taken, fam));
+      return {id: uid(), cat: b.cat, nom: b.nom, items: picks.map(function(e){ return mkItem(e, cfg.nivel); })};
+    }).filter(function(b){ return b.items.length; });
+    var ids = []; blocks.forEach(function(b){ b.items.forEach(function(it){ ids.push(it.ref); }); });
+    var r = R(); r.hist = r.hist.concat(ids).slice(-200);
+    return {id: uid(), tipo: cfg.tipo, dur: cfg.dur, nivel: cfg.nivel, uso: cfg.uso, eq: cfg.eq, estructura: cfg.estructura,
+      nombre: TIPOS[cfg.tipo] + " " + cfg.dur + " min · " + shortDate(), blocks: blocks, creada: Date.now()};
+  }
+  function cfgOf(rt){ return {tipo: rt.tipo, dur: rt.dur, nivel: rt.nivel, uso: rt.uso || "mezcla", eq: rt.eq || EQUIPOS[rt.tipo].slice(), estructura: rt.estructura || "std"}; }
+  function routineRefs(rt){
+    var taken = {}, fam = {};
+    rt.blocks.forEach(function(b){ b.items.forEach(function(it){
+      taken[it.ref] = 1; var e = exById(it.ref); if(e && e.fam) fam[e.fam] = 1;
+    }); });
+    return {taken: taken, fam: fam};
+  }
+
+  // ---------- acciones sobre la rutina actual ----------
+  function findBlock(rt, bid){ return rt.blocks.filter(function(b){ return b.id === bid; })[0]; }
+  function swapItem(bid, u){
+    var rt = R().actual, b = findBlock(rt, bid); if(!b) return;
+    var i = b.items.findIndex(function(x){ return x.uid === u; }); if(i < 0) return;
+    var refs = routineRefs(rt);
+    var pick = pickForBlock(rt.tipo, b.cat, 1, cfgOf(rt), refs.taken, refs.fam)[0];
+    if(!pick){ ui.msg = "No encontré otro ejercicio para ese bloque con tu material y nivel. Sube más ejercicios tuyos o cambia el material."; return; }
+    b.items[i] = mkItem(pick, rt.nivel);
+    R().hist.push(pick.id);
+  }
+  function regenBlock(bid){
+    var rt = R().actual, b = findBlock(rt, bid); if(!b) return;
+    var refs = routineRefs(rt);
+    b.items.forEach(function(it){ delete refs.taken[it.ref]; var e = exById(it.ref); if(e && e.fam) delete refs.fam[e.fam]; });
+    var picks = orderItems(rt.tipo, pickForBlock(rt.tipo, b.cat, b.items.length, cfgOf(rt), refs.taken, refs.fam));
+    if(!picks.length){ ui.msg = "No hay más ejercicios para cambiar ese bloque."; return; }
+    b.items = picks.map(function(e){ return mkItem(e, rt.nivel); });
+    picks.forEach(function(e){ R().hist.push(e.id); });
+  }
+  function moveItem(bid, u, dir){
+    var b = findBlock(R().actual, bid); if(!b) return;
+    var i = b.items.findIndex(function(x){ return x.uid === u; }), j = i + dir;
+    if(i < 0 || j < 0 || j >= b.items.length) return;
+    var t = b.items[i]; b.items[i] = b.items[j]; b.items[j] = t;
+  }
+  function delItem(bid, u){
+    var rt = R().actual, b = findBlock(rt, bid); if(!b) return;
+    b.items = b.items.filter(function(x){ return x.uid !== u; });
+    if(!b.items.length) rt.blocks = rt.blocks.filter(function(x){ return x.id !== bid; });
+  }
+  function candidatesFor(rt, b, all){
+    var refs = routineRefs(rt), eq = rt.eq || EQUIPOS[rt.tipo];
+    var pool = BASE.filter(function(e){ return e.tipo === rt.tipo && e.nivel <= (+rt.nivel) && eqOk(e, eq); })
+      .concat(R().biblio.filter(function(e){ return e.tipo === rt.tipo; }));
+    return pool.filter(function(e){
+      if(refs.taken[e.id] || (e.fam && refs.fam[e.fam])) return false;
+      return all || b.cat === "otro" || e.cat === b.cat || e.cat === "otro";
+    }).sort(function(a, c){ return (c.mine ? 1 : 0) - (a.mine ? 1 : 0) || a.nom.localeCompare(c.nom); });
+  }
+
+  // ---------- texto para copiar ----------
+  function routineText(rt){
+    var L = [(TIPOS[rt.tipo] + " · " + rt.dur + " min · " + nivelLabel(rt.nivel)).toUpperCase(), rt.nombre, ""];
+    var n = 0;
+    rt.blocks.forEach(function(b){
+      L.push(b.nom.toUpperCase());
+      b.items.forEach(function(it){ n++; L.push(n + ". " + it.nom + (it.dosis ? " — " + it.dosis : "")); });
+      L.push("");
+    });
+    return L.join("\n").trim();
+  }
+  function copyText(text, done, fail){
+    function legacy(){
+      try{
+        var ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", "");
+        ta.style.cssText = "position:fixed;top:-1000px;opacity:0"; document.body.appendChild(ta); ta.select();
+        var ok = document.execCommand("copy"); document.body.removeChild(ta); return ok;
+      }catch(e){ return false; }
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(function(){ legacy() ? done() : fail(); });
+    else legacy() ? done() : fail();
+  }
+
+  // ---------- importar las rutinas de Lía ----------
+  var KW = [
+    ["calentamiento", /calent|warm|prepar|movilidad|activacion/],
+    ["estiramiento", /estir|stretch|enfri|cool|relaj|cierre|calma|final/],
+    ["brazos", /brazo|bicep|tricep|hombro|\barm|pecho|press|remo/],
+    ["gluteos", /glute|puente|bridge|patada|arabesque|almeja|pretzel|hip thrust/],
+    ["piernas", /pierna|muslo|plie|releve|sentadilla|squat|curtsy|silla|chair|zancada|lunge|cuadricep|aductor|abductor|attitude|tren inferior/],
+    ["core", /core|abdom|\babs\b|plancha|plank|hundred|crunch|oblic|centro|c curve|teaser|dead bug|bicho/],
+    ["columna", /columna|spine|roll|saw|sierra|seal|foca|twist|giro/],
+    ["laterales", /lateral|side|mermaid|sirena|clam|concha/],
+    ["posterior", /posterior|espalda|swan|cisne|swimming|nado|dart|superman|leg pull|kick|bird|perro/]
+  ];
+  function detectCat(text, tipo){
+    var t = norm(text); if(!t) return null;
+    for(var i = 0; i < KW.length; i++){ if(KW[i][1].test(t)) return mapCat(tipo, KW[i][0]); }
+    return null;
+  }
+  function inferPat(s){
+    var t = norm(s);
+    if(/pulso|pulse|rebote/.test(t)) return "pulsos";
+    if(/sosten|hold|isometric|iso\b|estatic/.test(t)) return "iso";
+    if(/respir/.test(t)) return "resp";
+    if(/\bseg\b|segundos|\bmin\b|minuto/.test(t) && !/rep/.test(t)) return "seg";
+    return "rep";
+  }
+  var UNIT = "(?:repeticiones|repeticion|reps?|veces|segundos?|seg|min(?:utos?)?|cuentas|tiempos|pulsos|respiraciones|resp|lados?)";
+  var RE_TRAIL = new RegExp("(?:^|\\s)((?:\\d+\\s*[x×]\\s*)?\\d+(?:[.,]\\d+)?\\s*" + UNIT + "(?:\\s*(?:por|c\\/|x)\\s*lado)?|[x×]\\s*\\d+(?:\\s*(?:por|c\\/)\\s*lado)?|\\d+\\s*[x×]\\s*\\d+)\\s*$", "i");
+  var RE_LEAD = new RegExp("^((?:\\d+\\s*[x×]\\s*)?\\d+(?:[.,]\\d+)?\\s*" + UNIT + "?)\\s+(?=[A-Za-zÁÉÍÓÚÑáéíóúñ])", "i");
+  var HEAD_WORDS = /^(calentamiento|warm ?up|brazos|piernas|gluteos|core|abdomen|abdominales|estiramiento|estiramientos|cool ?down|cardio|espalda|columna|laterales|final|cierre|tren superior|tren inferior|muslos|centro|posterior)$/;
+  function isHeading(t){
+    if(/^#{1,6}\s+/.test(t)) return true;
+    if(!/^[-*•\d]/.test(t) && HEAD_WORDS.test(norm(t))) return true;   // "Piernas" solo en su línea
+    if(/[:：]\s*$/.test(t) && t.length < 60) return true;
+    if(/^(bloque|block|secci[oó]n|parte|fase)\b/i.test(t) && !/^[-*•\d]/.test(t)) return true;
+    var letters = t.replace(/[^A-Za-zÁÉÍÓÚÑáéíóúñ]/g, "");
+    return letters.length >= 4 && t === t.toUpperCase() && !/\d/.test(t) && t.length < 50 && !/^[-*•]/.test(t);
+  }
+  function parseLine(raw){
+    var t = raw.replace(/^\s*(?:[-*•·–—▪●○]+|\d+\s*[.)]|\(\d+\)|\d+\s*[-:])\s*/, "").trim();
+    if(!t) return null;
+    var nom = t, dosis = "", cue = "", m;
+    if((m = t.match(/\(([^)]*\d[^)]*)\)\s*$/))){ dosis = m[1].trim(); nom = t.slice(0, m.index).trim(); }
+    else if((m = t.match(/\s+[-–—]\s+|:\s+/))){
+      var left = t.slice(0, m.index).trim(), right = t.slice(m.index + m[0].length).trim();
+      if(left){ nom = left; if(/\d/.test(right) && right.length <= 40) dosis = right; else cue = right; }
+    }
+    if(!dosis){
+      var tm = nom.match(RE_TRAIL);
+      if(tm && nom.slice(0, tm.index).trim().length >= 2){ dosis = tm[1].trim(); nom = nom.slice(0, tm.index).trim(); }
+      else { var lm = nom.match(RE_LEAD); if(lm && nom.slice(lm[0].length).trim().length >= 2){ dosis = lm[1].trim(); nom = nom.slice(lm[0].length).trim(); } }
+    }
+    nom = nom.replace(/[\s.,;:–—-]+$/, "").replace(/^["“']+|["”']+$/g, "").replace(/\s+/g, " ").trim();
+    if(nom.length < 2) return null;
+    nom = nom.charAt(0).toUpperCase() + nom.slice(1);
+    if(nom.length > 90) nom = nom.slice(0, 90);
+    return {nom: nom, dosis: dosis, cue: cue};
+  }
+  function mkParsed(p, cat){
+    var s = p.nom + " " + p.dosis;
+    return {nom: p.nom, dosis: p.dosis, cue: p.cue || "", cat: cat, pat: inferPat(s), lado: /por lado|c\/lado|cada lado|cada pierna|por pierna|\blados\b/i.test(s)};
+  }
+  function parseText(text, tipo){
+    var lines = String(text || "").replace(/\r/g, "").split("\n");
+    var firstIdx = -1;
+    lines.some(function(l, i){ if(l.trim()){ firstIdx = i; return true; } return false; });
+    var csv = firstIdx >= 0 && /^(bloque|categor[ií]a|secci[oó]n)\s*[,;\t]\s*(ejercicio|nombre)/i.test(lines[firstIdx].trim());
+    var routines = [], cur = null, headCat = null, lastCat = null;
+    function newR(name){ cur = {id: uid(), nombre: name || "", tipo: tipo, items: []}; routines.push(cur); headCat = null; lastCat = null; }
+    lines.forEach(function(raw, idx){
+      var t = raw.trim(); if(!t) return;
+      if(csv){
+        if(idx === firstIdx) return;
+        var c = t.split(/[,;\t]/).map(function(x){ return x.trim(); });
+        if(!c[1]) return;
+        if(!cur) newR("");
+        var cat = detectCat(c[0], tipo) || detectCat(c[1], tipo) || lastCat || "otro";
+        lastCat = cat; cur.items.push(mkParsed({nom: c[1].charAt(0).toUpperCase() + c[1].slice(1), dosis: c[2] || "", cue: c[3] || ""}, cat));
+        return;
+      }
+      if(/^[-=_*]{3,}$/.test(t)){ cur = null; return; }
+      var rm = t.match(/^(?:#+\s*)?(rutina|clase|class|routine)\b\s*[:\-–#]?\s*(.*)$/i);
+      if(rm && t.length < 80 && !/^[-*•\d]/.test(t) && !/\d\s*[x×]/.test(t)){ newR(rm[2].replace(/[:：]\s*$/, "").trim()); return; }
+      if(idx === firstIdx && !cur && !/^[-*•\d]/.test(t) && /rutina|clase|barre|pilates|class/i.test(t) && !isHeading(t)){ newR(t); return; }
+      if(isHeading(t)){
+        var h = t.replace(/^#+\s*/, "").replace(/[:：]\s*$/, "").replace(/^(bloque|block|secci[oó]n|parte|fase)\s*\d*\s*[:\-–·.]?\s*/i, "").trim();
+        headCat = detectCat(h, tipo);
+        return;
+      }
+      var p = parseLine(t); if(!p) return;
+      if(!cur) newR("");
+      var cat2 = headCat || detectCat(p.nom, tipo) || lastCat || "otro";
+      lastCat = cat2; cur.items.push(mkParsed(p, cat2));
+    });
+    return routines.filter(function(r){ return r.items.length; });
+  }
+  function saveImport(){
+    var r = R(), imp = ui.imp; if(!imp) return;
+    var nEx = 0, nRt = 0;
+    imp.forEach(function(rt, ri){
+      var blocks = [];
+      rt.items.forEach(function(it){
+        var last = blocks[blocks.length - 1];
+        if(!last || last.cat !== it.cat){ last = {cat: it.cat, nom: catLabel(rt.tipo, it.cat), items: []}; blocks.push(last); }
+        last.items.push({nom: it.nom, dosis: it.dosis});
+        var key = norm(it.nom);
+        var ex = r.biblio.filter(function(e){ return e.tipo === rt.tipo && norm(e.nom) === key; })[0];
+        if(ex){ if(it.dosis) ex.dosis = it.dosis; if(it.cue) ex.cue = it.cue; ex.cat = it.cat; }
+        else {
+          var pat = (it.cat === "estiramiento" && it.pat === "rep" && !/\d/.test(it.dosis || "")) ? "iso" : it.pat;   // un estiramiento sin dosis se sostiene
+          r.biblio.push({id: "m_" + uid(), tipo: rt.tipo, cat: it.cat, nom: it.nom, dosis: it.dosis, pat: pat, lado: it.lado, cue: it.cue, mine: true}); nEx++;
+        }
+      });
+      r.subidas.unshift({id: uid(), nombre: rt.nombre || ("Mi rutina " + (ri + 1)), tipo: rt.tipo, creada: Date.now(), blocks: blocks});
+      nRt++;
+    });
+    var lastRt = imp[0]; if(lastRt){ r.prefs.tipo = lastRt.tipo; r.prefs.estructura = "std"; }   // el generador queda listo para esa clase
+    ui.imp = null; ui.impText = "";
+    ui.impMsg = "Listo: guardé " + nRt + " rutina" + (nRt === 1 ? "" : "s") + " y " + nEx + " ejercicio" + (nEx === 1 ? "" : "s") + " nuevo" + (nEx === 1 ? "" : "s") + " en tu biblioteca. Ya los usa el generador.";
+    save();
+  }
+
+  // ---------- vista ----------
+  function seg(act, opts, cur){
+    return '<div class="seg-row">' + opts.map(function(o){
+      return '<button type="button" class="seg-btn' + (String(o[0]) === String(cur) ? " on" : "") + '" data-act="' + act + '" data-v="' + esc(o[0]) + '">' + esc(o[1]) + '</button>';
+    }).join("") + '</div>';
+  }
+  function formHtml(){
+    var r = R(), p = r.prefs, t = p.tipo;
+    var mineN = r.biblio.filter(function(e){ return e.tipo === t; }).length;
+    var subs = r.subidas.filter(function(s){ return s.tipo === t; });
+    var estr = '<option value="std">Estándar de ' + esc(TIPOS[t]) + '</option>' + subs.map(function(s){
+      return '<option value="sub:' + esc(s.id) + '"' + (p.estructura === "sub:" + s.id ? " selected" : "") + '>Como mi rutina: ' + esc(s.nombre) + '</option>';
+    }).join("");
+    var eqs = EQUIPOS[t].map(function(q){
+      return '<button type="button" class="seg-btn' + (p.eq[t].indexOf(q) >= 0 ? " on" : "") + '" data-act="eq" data-v="' + q + '">' + esc(EQ_LABEL[q]) + '</button>';
+    }).join("");
+    return '<section class="section"><h2>Armar una rutina</h2>' +
+      '<p class="section-note">Elige el tipo de clase y te armo una rutina distinta cada vez, con tus ejercicios y con los de la biblioteca.</p>' +
+      '<div class="card rt-form">' +
+        '<div><span class="rt-label">Clase</span>' + seg("tipo", [["barre", "Barre"], ["pilates", "Pilates mat"]], t) + '</div>' +
+        '<div><span class="rt-label">Duración</span>' + seg("dur", [[30, "30 min"], [45, "45 min"], [50, "50 min"], [60, "60 min"]], p.dur) + '</div>' +
+        '<div><span class="rt-label">Nivel</span>' + seg("nivel", NIVELES, p.nivel) + '</div>' +
+        '<div><span class="rt-label">Con qué ejercicios</span>' + seg("uso", USOS, p.uso) +
+          (mineN ? '<p class="editor-hint" style="margin-top:6px">Tienes ' + mineN + ' ejercicio' + (mineN === 1 ? "" : "s") + ' tuyo' + (mineN === 1 ? "" : "s") + ' de ' + esc(TIPOS[t]) + '.' +
+                   (p.uso === "mias" && mineN < 25 ? ' Con pocos ejercicios propios las rutinas se parecen mucho; prueba “Mezcla con nuevos” para más variedad.' : '') + '</p>'
+                 : '<p class="editor-hint" style="margin-top:6px">Aún no subes ejercicios de ' + esc(TIPOS[t]) + ' — usa “Subir mis rutinas” abajo para que el generador trabaje con lo tuyo.</p>') + '</div>' +
+        '<div><span class="rt-label">Material con el que cuentas</span><div class="seg-row">' + eqs + '</div></div>' +
+        '<div class="field"><label for="rt-estr">Estructura</label><select id="rt-estr" data-fld="estructura">' + estr + '</select></div>' +
+        '<button type="button" class="btn" data-act="gen" style="padding:13px 16px;font-size:14.5px">✨ Generar rutina</button>' +
+      '</div></section>';
+  }
+  function itemHtml(b, it, n){
+    return '<div class="rt-item"><span class="rt-num num">' + n + '</span><div class="rt-main">' +
+      '<div class="rt-name">' + esc(it.nom) + (it.mine ? ' <span class="chip h2">tuyo</span>' : '') + '</div>' +
+      '<input class="rt-dose" data-fld="dosis" data-b="' + b.id + '" data-u="' + it.uid + '" value="' + esc(it.dosis) + '" aria-label="dosis">' +
+      (it.cue ? '<div class="rt-cue">' + esc(it.cue) + '</div>' : '') + '</div>' +
+      '<div class="rt-acts">' +
+        '<button type="button" data-act="up" data-b="' + b.id + '" data-u="' + it.uid + '" aria-label="subir">↑</button>' +
+        '<button type="button" data-act="down" data-b="' + b.id + '" data-u="' + it.uid + '" aria-label="bajar">↓</button>' +
+        '<button type="button" data-act="swap" data-b="' + b.id + '" data-u="' + it.uid + '" aria-label="cambiar por otro ejercicio">🔄</button>' +
+        '<button type="button" data-act="del" data-b="' + b.id + '" data-u="' + it.uid + '" aria-label="quitar">✕</button>' +
+      '</div></div>';
+  }
+  function pickerHtml(rt, b){
+    var all = !!ui.picker.all;
+    var cand = candidatesFor(rt, b, all).slice(0, 60);
+    return '<div class="rt-picker">' +
+      '<div class="rt-block-head" style="margin:0"><span class="editor-hint" style="margin:0">Toca uno para agregarlo' + (all ? "" : " a “" + esc(b.nom) + "”") + '</span><span class="spacer"></span>' +
+        '<button type="button" class="link-btn" data-act="pick-all">' + (all ? "Solo de este bloque" : "Ver de todos los bloques") + '</button>' +
+        '<button type="button" class="link-btn" data-act="pick-close">Cerrar</button></div>' +
+      (cand.length ? cand.map(function(e){
+        return '<button type="button" class="rt-pick-btn" data-act="pick-add" data-b="' + b.id + '" data-v="' + esc(e.id) + '">' + esc(e.nom) + (e.mine ? " · tuyo" : "") +
+          '<small>' + esc(catLabel(rt.tipo, e.cat)) + ' · ' + esc(doseFor(e, rt.nivel)) + '</small></button>';
+      }).join("") : '<p class="editor-hint" style="margin:0">No hay más ejercicios disponibles con tu material y nivel.</p>') +
+      '<div class="extra-form-grid" style="margin-top:4px"><div class="field"><label for="rt-cn">Escribe uno propio</label><input type="text" id="rt-cn" placeholder="ej. Plié con relevé"></div>' +
+        '<div class="field"><label for="rt-cd">Dosis</label><input type="text" id="rt-cd" placeholder="ej. 16 cuentas"></div>' +
+        '<button class="btn" type="button" data-act="pick-custom" data-b="' + b.id + '">Agregar</button></div></div>';
+  }
+  function routineHtml(){
+    var rt = R().actual;
+    if(!rt) return '<section class="section" id="rt-current"><p class="empty-hint">Tu rutina aparecerá aquí. Toca “Generar rutina” arriba.</p></section>';
+    var n = 0, total = 0; rt.blocks.forEach(function(b){ total += b.items.length; });
+    var blocks = rt.blocks.map(function(b){
+      var items = b.items.map(function(it){ n++; return itemHtml(b, it, n); }).join("");
+      return '<div class="rt-block"><div class="rt-block-head"><h3>' + esc(b.nom) + '</h3><span class="spacer"></span>' +
+        '<button type="button" class="link-btn" data-act="regen-block" data-b="' + b.id + '">🔄 Cambiar bloque</button>' +
+        '<button type="button" class="link-btn" data-act="pick-open" data-b="' + b.id + '">+ Ejercicio</button></div>' + items +
+        (ui.picker && ui.picker.bid === b.id ? pickerHtml(rt, b) : "") + '</div>';
+    }).join("");
+    return '<section class="section" id="rt-current"><h2>Tu rutina</h2>' +
+      '<div class="field"><label for="rt-nombre">Nombre</label><input type="text" id="rt-nombre" data-fld="nombre" value="' + esc(rt.nombre) + '"></div>' +
+      '<div class="rt-block-head" style="margin-top:10px"><span class="chip h0">' + esc(TIPOS[rt.tipo]) + '</span><span class="chip h1">' + rt.dur + ' min</span><span class="chip h4">' + esc(nivelLabel(rt.nivel)) + '</span><span class="chip h3">' + total + ' ejercicios</span></div>' +
+      (ui.msg ? '<p class="rt-msg">' + esc(ui.msg) + '</p>' : "") + blocks +
+      '<div class="rt-actions"><button type="button" class="btn" data-act="regen">🔁 Otra distinta</button>' +
+        '<button type="button" class="btn ghost" data-act="save">💾 Guardar</button>' +
+        '<button type="button" class="btn ghost" data-act="copy">📋 Copiar</button>' +
+        (navigator.share ? '<button type="button" class="btn ghost" data-act="share">📤 Compartir</button>' : "") +
+        '<span class="copy-status" id="rt-copied" hidden></span></div></section>';
+  }
+  function savedHtml(){
+    var g = R().guardadas;
+    if(!g.length) return "";
+    return '<section class="section"><h2>Mis rutinas guardadas</h2>' + g.map(function(rt){
+      var d = new Date(rt.creada || Date.now());
+      return '<div class="extra-row"><div style="flex:1;min-width:140px"><b>' + esc(rt.nombre) + '</b><div class="extra-riders">' + esc(TIPOS[rt.tipo]) + ' · ' + rt.dur + ' min · ' + d.getDate() + ' ' + MESES[d.getMonth()] + '</div></div>' +
+        '<button type="button" class="link-btn" data-act="open-saved" data-v="' + esc(rt.id) + '">Abrir</button>' +
+        '<button type="button" class="del" data-act="del-saved" data-v="' + esc(rt.id) + '" aria-label="borrar">✕</button></div>';
+    }).join("") + '</section>';
+  }
+  function importHtml(){
+    var r = R(), html = '<section class="section"><h2>Mis ejercicios y rutinas</h2>' +
+      '<p class="section-note">Sube las rutinas que ya das (pega el texto o sube un archivo .txt) y el generador las usa para armarte rutinas nuevas con tus mismos ejercicios.</p>';
+    if(ui.impMsg) html += '<p class="rt-msg" style="color:var(--good);background:var(--good-soft)">' + esc(ui.impMsg) + '</p>';
+    if(ui.imp){
+      html += ui.imp.map(function(rt, ri){
+        var catOpts = function(sel){ return CATS[rt.tipo].map(function(c){ return '<option value="' + c[0] + '"' + (c[0] === sel ? " selected" : "") + '>' + esc(c[1]) + '</option>'; }).join("") + '<option value="otro"' + (sel === "otro" ? " selected" : "") + '>Otros</option>'; };
+        return '<div class="card" style="margin-bottom:12px"><div class="extra-form-grid"><div class="field"><label>Nombre de la rutina</label><input type="text" data-fld="imp-name" data-ri="' + ri + '" value="' + esc(rt.nombre) + '" placeholder="ej. Barre lunes"></div>' +
+          '<div class="field"><label>Es de</label><select data-fld="imp-tipo" data-ri="' + ri + '"><option value="barre"' + (rt.tipo === "barre" ? " selected" : "") + '>Barre</option><option value="pilates"' + (rt.tipo === "pilates" ? " selected" : "") + '>Pilates mat</option></select></div></div>' +
+          '<p class="editor-hint" style="margin:10px 0 6px">Revisa que cada ejercicio quedó en su bloque y con su dosis:</p>' +
+          rt.items.map(function(it, ii){
+            return '<div class="imp-row"><select class="rt-in" data-fld="imp-cat" data-ri="' + ri + '" data-ii="' + ii + '">' + catOpts(it.cat) + '</select>' +
+              '<input class="rt-in imp-nom" data-fld="imp-nom" data-ri="' + ri + '" data-ii="' + ii + '" value="' + esc(it.nom) + '">' +
+              '<input class="rt-in imp-dose" data-fld="imp-dosis" data-ri="' + ri + '" data-ii="' + ii + '" value="' + esc(it.dosis) + '" placeholder="dosis">' +
+              '<button type="button" class="icon-del" data-act="imp-del" data-ri="' + ri + '" data-ii="' + ii + '" aria-label="quitar">✕</button></div>';
+          }).join("") + '</div>';
+      }).join("") +
+        '<div class="rt-actions"><button type="button" class="btn" data-act="imp-save">Guardar en mi biblioteca</button><button type="button" class="btn ghost" data-act="imp-cancel">Cancelar</button></div>';
+    } else {
+      html += '<div class="card rt-form"><div><span class="rt-label">Estas rutinas son de</span>' + seg("imp-tipo", [["barre", "Barre"], ["pilates", "Pilates mat"]], ui.impTipo) + '</div>' +
+        '<div class="field"><label for="rt-file">Subir un archivo (.txt, .md o .csv)</label><input type="file" id="rt-file" accept=".txt,.md,.csv,.text,text/plain" data-fld="imp-file"></div>' +
+        '<div class="field"><label for="rt-text">…o pega aquí tu rutina</label><textarea id="rt-text" class="rt-textarea" data-fld="imp-text" placeholder="Brazos:\n- Curl en segunda 32 cuentas\n- Press lateral con pulso x16\n\nPiernas:\n- Plié ancho — 4 × 8\n- Relevé en plié (30 seg)">' + esc(ui.impText) + '</textarea></div>' +
+        '<p class="editor-hint" style="margin:0">Un ejercicio por línea. Los títulos de bloque (Brazos, Piernas, Glúteos, Core…) los detecto solos. Si tu rutina está en Word, PDF o foto, cópiala y pégala aquí.</p>' +
+        '<button type="button" class="btn" data-act="imp-read">Leer mi rutina</button></div>';
+    }
+    // biblioteca propia
+    var mine = r.biblio;
+    html += '<details class="editor-panel"><summary>📚 Mis ejercicios (' + mine.length + ')</summary><div class="editor-body">' +
+      (mine.length ? ["barre", "pilates"].map(function(t){
+        var list = mine.filter(function(e){ return e.tipo === t; }); if(!list.length) return "";
+        return '<div><span class="rt-label">' + esc(TIPOS[t]) + '</span>' + list.map(function(e){
+          return '<div class="pl-item"><span class="pl-when" style="width:auto;flex:1">' + esc(e.nom) + '</span><span class="pl-mid" style="flex:0 0 auto">' + esc(catLabel(t, e.cat)) + (e.dosis ? " · " + esc(e.dosis) : "") + '</span><button type="button" class="del" data-act="del-ex" data-v="' + esc(e.id) + '" aria-label="quitar">✕</button></div>';
+        }).join("") + '</div>';
+      }).join("") : '<p class="empty-hint">Aún no tienes ejercicios propios.</p>') + '</div></details>' +
+      '<details class="editor-panel"><summary>🗂️ Mis rutinas subidas (' + r.subidas.length + ')</summary><div class="editor-body">' +
+      (r.subidas.length ? r.subidas.map(function(s){
+        var n = 0; s.blocks.forEach(function(b){ n += b.items.length; });
+        return '<div class="pl-item"><span class="pl-when" style="width:auto;flex:1">' + esc(s.nombre) + '</span><span class="pl-mid" style="flex:0 0 auto">' + esc(TIPOS[s.tipo]) + ' · ' + n + ' ejercicios</span><button type="button" class="del" data-act="del-sub" data-v="' + esc(s.id) + '" aria-label="quitar">✕</button></div>';
+      }).join("") : '<p class="empty-hint">Aún no subes rutinas.</p>') + '<p class="editor-hint">Borrar una rutina subida no borra sus ejercicios; esos se quitan en “Mis ejercicios”.</p></div></details></section>';
+    return html;
+  }
+  function render(){
+    root.innerHTML = formHtml() + routineHtml() + savedHtml() + importHtml();
+  }
+
+  // ---------- eventos (delegados) ----------
+  function gen(){
+    var r = R(); ui.msg = ""; ui.picker = null;
+    r.actual = generate(cfgFromPrefs());
+    save(); render();
+    var c = document.getElementById("rt-current"); if(c && c.scrollIntoView) c.scrollIntoView({behavior: "smooth", block: "start"});
+  }
+  root.addEventListener("click", function(ev){
+    var el = ev.target.closest("[data-act]"); if(!el || !root.contains(el)) return;
+    var act = el.getAttribute("data-act"), v = el.getAttribute("data-v"), b = el.getAttribute("data-b"), u = el.getAttribute("data-u");
+    var r = R(), p = r.prefs, rt = r.actual, ri = el.getAttribute("data-ri"), ii = el.getAttribute("data-ii");
+    ui.msg = "";
+    switch(act){
+      case "tipo": p.tipo = v; p.estructura = "std"; ui.picker = null; save(); break;
+      case "dur": p.dur = +v; save(); break;
+      case "nivel": p.nivel = v; save(); break;
+      case "uso": p.uso = v; save(); break;
+      case "eq": var a = p.eq[p.tipo], k = a.indexOf(v); if(k >= 0) a.splice(k, 1); else a.push(v); save(); break;
+      case "gen": gen(); return;
+      case "regen": if(rt){ r.actual = generate(cfgOf(rt)); r.actual.nombre = rt.nombre; ui.picker = null; save(); } break;
+      case "regen-block": if(rt){ regenBlock(b); save(); } break;
+      case "swap": if(rt){ swapItem(b, u); save(); } break;
+      case "up": if(rt){ moveItem(b, u, -1); save(); } break;
+      case "down": if(rt){ moveItem(b, u, 1); save(); } break;
+      case "del": if(rt){ delItem(b, u); save(); } break;
+      case "pick-open": ui.picker = (ui.picker && ui.picker.bid === b) ? null : {bid: b, all: false}; break;
+      case "pick-close": ui.picker = null; break;
+      case "pick-all": if(ui.picker) ui.picker.all = !ui.picker.all; break;
+      case "pick-add":
+        if(rt){ var e = exById(v), bl = findBlock(rt, b); if(e && bl){ bl.items.push(mkItem(e, rt.nivel)); r.hist.push(e.id); save(); } }
+        break;
+      case "pick-custom":
+        if(rt){
+          var nm = (document.getElementById("rt-cn").value || "").trim(), ds = (document.getElementById("rt-cd").value || "").trim(), bl2 = findBlock(rt, b);
+          if(!nm){ ui.msg = "Escribe el nombre del ejercicio."; break; }
+          if(bl2){ bl2.items.push({uid: uid(), ref: "x_" + uid(), nom: nm, dosis: ds, cue: "", mine: true}); save(); }
+        }
+        break;
+      case "save":
+        if(rt){ var copy = JSON.parse(JSON.stringify(rt)); copy.id = uid(); copy.creada = Date.now(); r.guardadas.unshift(copy); ui.msg = ""; save(); ui.impMsg = ""; }
+        break;
+      case "copy":
+        if(rt) copyText(routineText(rt), function(){ var s = document.getElementById("rt-copied"); if(s){ s.textContent = "Copiado ✓"; s.hidden = false; } }, function(){ var s = document.getElementById("rt-copied"); if(s){ s.textContent = "No se pudo copiar"; s.style.color = "var(--pending)"; s.hidden = false; } });
+        return;
+      case "share": if(rt && navigator.share) navigator.share({title: rt.nombre, text: routineText(rt)}).catch(function(){}); return;
+      case "open-saved":
+        var sv = r.guardadas.filter(function(x){ return x.id === v; })[0];
+        if(sv){ r.actual = JSON.parse(JSON.stringify(sv)); p.tipo = sv.tipo; ui.picker = null; save(); render(); var c = document.getElementById("rt-current"); if(c && c.scrollIntoView) c.scrollIntoView({behavior: "smooth"}); return; }
+        break;
+      case "del-saved": if(window.confirm("¿Borrar esta rutina guardada?")){ r.guardadas = r.guardadas.filter(function(x){ return x.id !== v; }); save(); } break;
+      case "imp-tipo": ui.impTipo = v; break;
+      case "imp-read":
+        var found = parseText(ui.impText, ui.impTipo);
+        if(!found.length){ ui.impMsg = "No encontré ejercicios en ese texto. Pon un ejercicio por línea."; break; }
+        ui.impMsg = ""; ui.imp = found; break;
+      case "imp-cancel": ui.imp = null; break;
+      case "imp-del": if(ui.imp){ ui.imp[+ri].items.splice(+ii, 1); if(!ui.imp[+ri].items.length) ui.imp.splice(+ri, 1); if(!ui.imp.length) ui.imp = null; } break;
+      case "imp-save": saveImport(); break;
+      case "del-ex": r.biblio = r.biblio.filter(function(x){ return x.id !== v; }); save(); break;
+      case "del-sub": r.subidas = r.subidas.filter(function(x){ return x.id !== v; }); if(r.prefs.estructura === "sub:" + v) r.prefs.estructura = "std"; save(); break;
+      default: return;
+    }
+    render();
+  });
+  root.addEventListener("input", function(ev){
+    var el = ev.target;
+    if(el.getAttribute && el.getAttribute("data-fld") === "imp-text") ui.impText = el.value;
+  });
+  root.addEventListener("change", function(ev){
+    var el = ev.target.closest("[data-fld]"); if(!el) return;
+    var f = el.getAttribute("data-fld"), r = R(), rt = r.actual, ri = el.getAttribute("data-ri"), ii = el.getAttribute("data-ii");
+    if(f === "estructura"){ r.prefs.estructura = el.value; save(); return; }
+    if(f === "nombre" && rt){ rt.nombre = el.value.trim() || rt.nombre; save(); return; }
+    if(f === "dosis" && rt){
+      var b = findBlock(rt, el.getAttribute("data-b")), it = b && b.items.filter(function(x){ return x.uid === el.getAttribute("data-u"); })[0];
+      if(it){ it.dosis = el.value.trim(); save(); }
+      return;
+    }
+    if(f === "imp-file"){
+      var file = el.files && el.files[0]; if(!file) return;
+      var fr = new FileReader();
+      fr.onload = function(){ ui.impText = String(fr.result || ""); ui.impMsg = ""; render(); };
+      fr.onerror = function(){ ui.impMsg = "No pude leer ese archivo. Prueba pegando el texto."; render(); };
+      fr.readAsText(file);
+      return;
+    }
+    if(!ui.imp) return;
+    if(f === "imp-name") ui.imp[+ri].nombre = el.value;
+    else if(f === "imp-tipo"){
+      var rr = ui.imp[+ri]; rr.tipo = el.value;
+      rr.items.forEach(function(x){ x.cat = mapCat(rr.tipo, x.cat) || detectCat(x.nom, rr.tipo) || "otro"; });
+      render();
+    }
+    else if(f === "imp-cat") ui.imp[+ri].items[+ii].cat = el.value;
+    else if(f === "imp-nom") ui.imp[+ri].items[+ii].nom = el.value.trim() || ui.imp[+ri].items[+ii].nom;
+    else if(f === "imp-dosis") ui.imp[+ri].items[+ii].dosis = el.value.trim();
+  });
+
+  render();
+  window.__PL.rutinasRender = render;
 })();
 </script>
 </body>
